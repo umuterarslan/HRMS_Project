@@ -1,6 +1,5 @@
 package com.emin.hrms.entities.concretes;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,17 +10,22 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="job_positions" , uniqueConstraints = {@UniqueConstraint(columnNames = {"job_title"})})
-public class JobPosition {
+@Table(name="jobseekers_activation")
+public class JobSeekerActivation {
 
     @Id
     @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
     private int id;
 
-    @Column(name="job_title")
-    @NotNull
-    private String jobTitle;
+    @Column(name="jobseeker_id")
+    private int jobseekerId;
+
+    @Column(name = "is_email_confirmed")
+    private boolean isEmail = false;
+
+    @Column(name = "is_mernis_valid")
+    private boolean isMernis = false;
+
 
 }

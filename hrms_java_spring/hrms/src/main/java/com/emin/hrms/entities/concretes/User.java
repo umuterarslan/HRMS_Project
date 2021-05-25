@@ -11,17 +11,21 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="job_positions" , uniqueConstraints = {@UniqueConstraint(columnNames = {"job_title"})})
-public class JobPosition {
+@Table(name = "users" , uniqueConstraints = {@UniqueConstraint(columnNames = {"email"})})
+public class User {
 
     @Id
-    @Column(name="id")
+    @Column(name ="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NotNull
     private int id;
 
-    @Column(name="job_title")
+    @Column(name="email")
     @NotNull
-    private String jobTitle;
+    private String email;
+
+    @Column(name="password")
+    @NotNull
+    private String password;
 
 }
