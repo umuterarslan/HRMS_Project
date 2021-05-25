@@ -1,10 +1,10 @@
 ## HRMS_Project
 
-### <span style="color: #00d2d3;">Day 6</span>
+### ` + Day 6`
 
 ![Screenshot_1](https://user-images.githubusercontent.com/83310769/117731681-38a04c80-b1f7-11eb-85ca-4fb3038af3dc.png)
 
-### <span style="color: #00d2d3;">Day 7</span>
+### ` + Day 7`
 
 #### Job Position
 
