@@ -36,6 +36,8 @@ public class EmployerManager implements EmployerService {
                 return new ErrorResult("Mail formata uygun değil!");
             } else if (!employerDomain.equals(website)) {
                 return new ErrorResult("Şirket gerçekliği doğrulanamadı!");
+            } else if (!employer.getPassword().equals(employer.getConfirmPassword())) {
+                return new ErrorResult("Girilen parolalar aynı olmalıdır!");
             } else {
                 this.employerDao.save(employer);
                 return new SuccessResult("İş arayan olarak kayıt olundu! Eposta adresinizden üyeliğinizi onaylayınız.");

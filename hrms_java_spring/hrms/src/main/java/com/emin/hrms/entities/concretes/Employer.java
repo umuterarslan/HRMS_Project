@@ -1,5 +1,6 @@
 package com.emin.hrms.entities.concretes;
 
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -15,19 +16,22 @@ public class Employer extends User{
     @Id
     @Column(name="employer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NonNull
+    @NotNull
     private int id;
 
     @Column(name="company_name")
-    @NonNull
+    @NotNull
     private String companyName;
 
     @Column(name="website")
-    @NonNull
+    @NotNull
     private String website;
 
     @Column(name="phone_number")
-    @NonNull
+    @NotNull
     private String phoneNumber;
+
+    @NotNull
+    private String confirmPassword;
 
 }
