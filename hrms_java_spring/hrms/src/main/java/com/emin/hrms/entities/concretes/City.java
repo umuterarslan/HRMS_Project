@@ -1,32 +1,32 @@
 package com.emin.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = false)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="job_positions")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","products"})
-public class JobPosition {
+@Table(name="cities")
+public class City {
 
     @Id
-    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
-    @Column(name="job_title")
-    private String jobTitle;
+    @Column(name = "city_name")
+    private String cityName;
 
-    @OneToMany(mappedBy = "jobPosition")
     @JsonIgnore
+    @OneToMany(mappedBy = "city")
     private List<JobAdvert> jobAdverts;
 
 }

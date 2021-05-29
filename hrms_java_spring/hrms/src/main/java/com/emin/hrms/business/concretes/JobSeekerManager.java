@@ -46,7 +46,7 @@ public class JobSeekerManager implements JobSeekerService {
             } else {
                 return new ErrorResult("Kimlik numarası sistemde zaten mevcut!");
             }
-
         }
     }
+
 }

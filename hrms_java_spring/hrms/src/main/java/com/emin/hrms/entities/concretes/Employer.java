@@ -1,37 +1,36 @@
 package com.emin.hrms.entities.concretes;
 
-import com.sun.istack.NotNull;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="employers")
-public class Employer extends User{
+@Table(name = "employers")
+@PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "products"})
+public class Employer extends User {
 
-    @Id
-    @Column(name="employer_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull
-    private int id;
-
-    @Column(name="company_name")
-    @NotNull
+    @Column(name = "company_name")
     private String companyName;
 
-    @Column(name="website")
-    @NotNull
+    @Column(name = "website")
     private String website;
 
-    @Column(name="phone_number")
-    @NotNull
+    @Column(name = "phone_number")
     private String phoneNumber;
 
-    @NotNull
+    @Transient
     private String confirmPassword;
+
+    @OneToMany(mappedBy = "employer")
+    @JsonIgnore
+    private List<JobAdvert> jobAdverts;
 
 }

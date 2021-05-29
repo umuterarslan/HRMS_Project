@@ -7,6 +7,9 @@ import com.emin.hrms.entities.concretes.JobPosition;
 import java.util.List;
 
 public interface JobPositionService {
+
    DataResult<List<JobPosition>> getPositions();
+
    Result addJobPosition(JobPosition jobPosition);
+
 }
