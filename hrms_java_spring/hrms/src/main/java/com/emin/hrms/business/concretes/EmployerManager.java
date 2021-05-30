@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public class EmployerManager implements EmployerService {
 
-    private EmployerDao employerDao;
+    private final EmployerDao employerDao;
 
     @Autowired
     public EmployerManager(EmployerDao employerDao) {
@@ -27,7 +27,7 @@ public class EmployerManager implements EmployerService {
 
     @Override
     public Result addEmployer(Employer employer) {
-        String[] employerWebsite = employer.getWebsite().split("\\.",2);
+        String[] employerWebsite = employer.getWebsite().split("\\.", 2);
         String website = employerWebsite[1];
         String[] employerEmail = employer.getEmail().split("@");
         String employerDomain = employerEmail[1];

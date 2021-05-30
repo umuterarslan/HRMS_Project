@@ -1,8 +1,6 @@
 package com.emin.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,25 +15,25 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="job_adverts")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","products"})
+@Table(name = "job_adverts")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "products"})
 public class JobAdvert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="description")
+    @Column(name = "description")
     private String description;
 
-    @Column(name="salary")
+    @Column(name = "salary")
     private int salary;
 
-    @Column(name="position_count")
+    @Column(name = "position_count")
     private int positionCount;
 
-    @Column(name="expire_date")
+    @Column(name = "expire_date")
     private LocalDate expireDate;
 
     @Column(name = "release_date")

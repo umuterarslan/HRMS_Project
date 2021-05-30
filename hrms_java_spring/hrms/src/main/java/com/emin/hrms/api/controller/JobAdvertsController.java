@@ -12,19 +12,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/jobadverts")
 public class JobAdvertsController {
-    private JobAdvertService jobAdvertService;
+
+    private final JobAdvertService jobAdvertService;
 
     @Autowired
     public JobAdvertsController(JobAdvertService jobAdvertService) {
         this.jobAdvertService = jobAdvertService;
     }
 
-    @GetMapping("/getjobadverts")
+    @GetMapping("/getJobAdverts")
     public DataResult<List<JobAdvert>> getJobAdverts() {
         return this.jobAdvertService.getJobAdverts();
     }
 
-    @PostMapping("/addjobadvert")
+    @PostMapping("/addJobAdvert")
     public Result addEmployer(@RequestBody JobAdvert jobAdvert) {
         return this.jobAdvertService.addJobAdvert(jobAdvert);
     }
@@ -44,9 +45,9 @@ public class JobAdvertsController {
         return this.jobAdvertService.getActiveJobAdvertsForEmployer(companyName);
     }
 
-    @PostMapping("/updateIsActive")
-    public Result deactiveJobAdvert(@RequestParam("id") int jobAdvertId) {
-        return this.jobAdvertService.deactiveJobAdvert(jobAdvertId);
+    @PostMapping("/setPasiveJobAdvert")
+    public Result setPasiveJobAdvert(@RequestParam("id") int jobAdvertId) {
+        return this.jobAdvertService.setPasiveJobAdvert(jobAdvertId);
     }
 
 }

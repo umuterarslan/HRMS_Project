@@ -10,14 +10,14 @@ public interface JobAdvertService {
 
     DataResult<List<JobAdvert>> getJobAdverts();
 
+    Result addJobAdvert(JobAdvert jobAdverts);
+
     DataResult<List<JobAdvert>> getActiveJobAdverts();
 
     DataResult<List<JobAdvert>> findAllByIsActiveTrue();
 
     DataResult<List<JobAdvert>> getActiveJobAdvertsForEmployer(String companyName);
 
-    Result deactiveJobAdvert(int jobAdvertId);
-
-    Result addJobAdvert(JobAdvert jobAdverts);
+    Result setPasiveJobAdvert(int jobAdvertId);
 
 }

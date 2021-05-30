@@ -8,8 +8,8 @@ import java.util.List;
 
 public interface JobPositionService {
 
-   DataResult<List<JobPosition>> getPositions();
+    DataResult<List<JobPosition>> getPositions();
 
-   Result addJobPosition(JobPosition jobPosition);
+    Result addJobPosition(JobPosition jobPosition);
 
 }

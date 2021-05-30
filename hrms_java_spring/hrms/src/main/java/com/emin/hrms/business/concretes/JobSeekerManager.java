@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class JobSeekerManager implements JobSeekerService {
 
-    private JobSeekerDao jobSeekerDao;
-    private MernisCheckService mernisCheckService;
+    private final JobSeekerDao jobSeekerDao;
+    private final MernisCheckService mernisCheckService;
 
     @Autowired
     public JobSeekerManager(JobSeekerDao jobSeekerDao, MernisCheckService mernisCheckService) {
@@ -39,7 +39,7 @@ public class JobSeekerManager implements JobSeekerService {
                 this.jobSeekerDao.save(jobSeeker);
                 return new SuccessResult("İş arayan olarak kayıt olundu! Eposta adresinizden üyeliğinizi onaylayınız.");
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             if (e.getMessage()
                     .equals("could not execute statement; SQL [n/a]; constraint [uc_users_email]; nested exception is org.hibernate.exception.ConstraintViolationException: could not execute statement")) {
                 return new ErrorResult("Kayıt olunmak istenilen eposta sistemde zaten kayıtlı!");

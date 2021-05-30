@@ -13,7 +13,7 @@ import java.util.List;
 @RequestMapping("/api/jobseekers")
 public class JobSeekersController {
 
-    private JobSeekerService jobSeekerService;
+    private final JobSeekerService jobSeekerService;
 
     @Autowired
     public JobSeekersController(JobSeekerService jobSeekerService) {

@@ -12,11 +12,11 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="system_personels")
+@Table(name = "system_personels")
 @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
-public class SystemPersonel extends User{
+public class SystemPersonel extends User {
 
-    @Column(name="username")
+    @Column(name = "username")
     private String username;
 
 }

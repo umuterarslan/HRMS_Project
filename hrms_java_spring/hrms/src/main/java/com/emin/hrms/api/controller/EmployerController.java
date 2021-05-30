@@ -13,10 +13,10 @@ import java.util.List;
 @RequestMapping("/api/employers")
 public class EmployerController {
 
-    private EmployerService employerService;
+    private final EmployerService employerService;
 
     @Autowired
-    public EmployerController (EmployerService employerService) {
+    public EmployerController(EmployerService employerService) {
         this.employerService = employerService;
     }
 

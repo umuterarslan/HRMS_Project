@@ -10,21 +10,21 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="employer_activation")
+@Table(name = "employer_activation")
 public class EmployerActivation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="employer_id")
+    @Column(name = "employer_id")
     private int employerId;
 
-    @Column(name="is_email_confirmed")
+    @Column(name = "is_email_confirmed")
     private boolean isEmail = false;
 
-    @Column(name="is_employer_activated")
+    @Column(name = "is_employer_activated")
     private boolean isActive = false;
 
 }

@@ -13,16 +13,16 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="job_positions")
-@JsonIgnoreProperties({"hibernateLazyInitializer","handler","products"})
+@Table(name = "job_positions")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "products"})
 public class JobPosition {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="job_title")
+    @Column(name = "job_title")
     private String jobTitle;
 
     @OneToMany(mappedBy = "jobPosition")

@@ -10,15 +10,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="jobseekers_activation")
+@Table(name = "jobseekers_activation")
 public class JobSeekerActivation {
 
     @Id
-    @Column(name="id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="jobseeker_id")
+    @Column(name = "jobseeker_id")
     private int jobseekerId;
 
     @Column(name = "is_email_confirmed")
