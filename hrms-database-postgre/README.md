@@ -1,3 +1,3 @@
 ## Database Diagram
 
-![hrms-database-diagram](https://user-images.githubusercontent.com/83310769/120110131-012d1c00-c175-11eb-95a1-0e9cf1ca95c9.png)
+![hrms_database_diagram](https://user-images.githubusercontent.com/83310769/120369258-af72c600-c31b-11eb-9d8d-d932cc9d54f3.png)
