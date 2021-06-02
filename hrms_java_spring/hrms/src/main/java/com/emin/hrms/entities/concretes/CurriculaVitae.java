@@ -28,31 +28,31 @@ public class CurriculaVitae {
     private String coverLetter;
 
     @ManyToOne
-    @JoinColumn(name = "education_id")
-    private Education education;
+    @JoinColumn(name = "social_media_id")
+    private SocialMedia socialMedia;
 
     @JsonIgnore
     @OneToMany(mappedBy = "curriculaVitae")
     private List<JobSeeker> jobSeekers;
 
-    @ManyToOne
-    @JoinColumn(name = "business_life_id")
-    private BusinessLife businessLife;
+    @JsonIgnore
+    @OneToMany(mappedBy = "curriculaVitae")
+    private List<Education> educations;
 
-    @ManyToOne
-    @JoinColumn(name = "jobseeker_language_id")
-    private JobseekerLanguage jobseekerLanguage;
+    @JsonIgnore
+    @OneToMany(mappedBy = "curriculaVitae")
+    private List<BusinessLife> businessLifes;
 
-    @ManyToOne
-    @JoinColumn(name = "programming_language_id")
-    private ProgrammingLanguage programmingLanguage;
+    @JsonIgnore
+    @OneToMany(mappedBy = "curriculaVitae")
+    private List<JobseekerLanguage> jobseekerLanguages;
 
-    @ManyToOne
-    @JoinColumn(name = "social_media_id")
-    private SocialMedia socialMedia;
+    @JsonIgnore
+    @OneToMany(mappedBy = "curriculaVitae")
+    private List<JobseekerPicture> jobseekerPictures;
 
-    @ManyToOne
-    @JoinColumn(name = "jobseeker_picture_id")
-    private JobseekerPicture jobseekerPicture;
+    @JsonIgnore
+    @OneToMany(mappedBy = "curriculaVitae")
+    private List<ProgrammingLanguage> programmingLanguages;
 
 }

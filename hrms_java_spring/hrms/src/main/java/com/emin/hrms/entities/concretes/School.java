@@ -30,7 +30,7 @@ public class School {
     private List<Departmant> departments;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "education")
-    private List<Departmant> educations;
+    @OneToMany(mappedBy = "school")
+    private List<Education> educations;
 
 }

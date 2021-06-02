@@ -25,8 +25,8 @@ public class JobseekerPicture {
     @Column(name = "picture_url")
     private String pictureUrl;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "jobseekerPicture")
-    private List<CurriculaVitae> curriculaVitaes;
+    @ManyToOne
+    @JoinColumn(name = "curricula_vitae_id")
+    private CurriculaVitae curriculaVitae;
 
 }

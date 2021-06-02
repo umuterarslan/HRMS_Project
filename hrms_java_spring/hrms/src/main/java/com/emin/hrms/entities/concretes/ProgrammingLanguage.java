@@ -30,4 +30,8 @@ public class ProgrammingLanguage {
     @OneToMany(mappedBy = "programmingLanguage")
     private List<CurriculaVitae> curriculaVitaes;
 
+    @ManyToOne
+    @JoinColumn(name = "curricula_vitae_id")
+    private CurriculaVitae curriculaVitae;
+
 }

@@ -1,11 +1,13 @@
 package com.emin.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,8 +25,8 @@ public class Departmant {
     @Column(name = "department_name")
     private String departmentName;
 
-    @ManyToOne
-    @JoinColumn(name = "school_id")
-    private School school;
+    @JsonIgnore
+    @OneToMany(mappedBy = "department")
+    private List<Education> educations;
 
 }

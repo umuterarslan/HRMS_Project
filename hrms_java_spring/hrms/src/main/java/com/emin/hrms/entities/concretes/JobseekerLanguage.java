@@ -36,7 +36,8 @@ public class JobseekerLanguage {
     @JoinColumn(name = "language_id")
     private Language language;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "jobSeekerLanguage")
-    private List<CurriculaVitae> curriculaVitaes;
+    @ManyToOne
+    @JoinColumn(name = "curricula_vitae_id")
+    private CurriculaVitae curriculaVitae;
+
 }

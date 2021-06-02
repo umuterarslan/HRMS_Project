@@ -38,8 +38,8 @@ public class BusinessLife {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "businessLife")
-    private List<CurriculaVitae> curriculaVitaes;
+    @ManyToOne
+    @JoinColumn(name = "curricula_vitae_id")
+    private CurriculaVitae curriculaVitae;
 
 }

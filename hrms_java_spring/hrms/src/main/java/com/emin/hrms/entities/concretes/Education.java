@@ -36,8 +36,13 @@ public class Education {
     @JoinColumn(name = "school_id")
     private School school;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "education")
-    private List<CurriculaVitae> curriculaVitaes;
+    @ManyToOne
+    @JoinColumn(name = "curricula_vitae_id")
+    private CurriculaVitae curriculaVitae;
+
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    private Departmant departmant;
+
 
 }
