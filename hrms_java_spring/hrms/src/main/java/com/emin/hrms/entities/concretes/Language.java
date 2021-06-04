@@ -26,7 +26,7 @@ public class Language {
     private String languageName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "languages")
-    private List<JobseekerLanguage> languages;
+    @OneToMany(mappedBy = "language")
+    private List<JobSeekerLanguage> languages;
 
 }

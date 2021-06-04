@@ -1,6 +1,7 @@
 package com.emin.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "business_lifes")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","curriculaVitae"})
 public class BusinessLife {
 
     @Id

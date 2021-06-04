@@ -101,16 +101,18 @@ CREATE TABLE public.job_adverts
 
 CREATE TABLE public.curricula_vitaes
 (
-    id              INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    social_media_id INTEGER NOT NULL,
-    cover_letter    CHARACTER VARYING(200),
+    id                   INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    jobseeker_picture_id INTEGER NOT NULL,
+    social_media_id      INTEGER NOT NULL,
+    cover_letter         CHARACTER VARYING(200),
+    picture_url          CHARACTER VARYING(200),
     CONSTRAINT pk_curricula_vitaes PRIMARY KEY (id)
 );
 
 CREATE TABLE public.educations
 (
     id                   INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    curricula_vitae_id  INTEGER NOT NULL,
+    curricula_vitae_id   INTEGER NOT NULL,
     school_id            INTEGER NOT NULL,
     department_id        INTEGER NOT NULL,
     education_start_date DATE    NOT NULL,
@@ -132,7 +134,7 @@ CREATE TABLE public.departments
     CONSTRAINT pk_departmants PRIMARY KEY (id)
 );
 
-CREATE TABLE public.business_life
+CREATE TABLE public.business_lifes
 (
     id                 INTEGER                NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
     curricula_vitae_id INTEGER                NOT NULL,
@@ -140,7 +142,7 @@ CREATE TABLE public.business_life
     position_name      CHARACTER VARYING(100) NOT NULL,
     bl_start_date      DATE                   NOT NULL,
     end_date           DATE,
-    CONSTRAINT pk_business_life PRIMARY KEY (id)
+    CONSTRAINT pk_business_lifes PRIMARY KEY (id)
 );
 
 CREATE TABLE public.languages
@@ -177,27 +179,15 @@ CREATE TABLE public.programming_languages
     CONSTRAINT pk_programming_language PRIMARY KEY (id)
 );
 
-CREATE TABLE public.jobseeker_pictures
-(
-    id                 INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    curricula_vitae_id INTEGER NOT NULL,
-    picture_url        CHARACTER VARYING(2083) UNIQUE,
-    CONSTRAINT pk_jobseeker_pictures PRIMARY KEY (id),
-    CONSTRAINT uc_jobseeker_pictures UNIQUE (picture_url)
-);
-
 ALTER TABLE public.curricula_vitaes
     ADD FOREIGN KEY (social_media_id) REFERENCES public.social_medias (id);
-
-ALTER TABLE public.jobseekers
-    ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
 
 ALTER TABLE public.educations
     ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id),
     ADD FOREIGN KEY (school_id) REFERENCES public.schools (id),
     ADD FOREIGN KEY (department_id) REFERENCES public.departments (id);
 
-ALTER TABLE public.business_life
+ALTER TABLE public.business_lifes
     ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
 
 ALTER TABLE public.jobseeker_languages
@@ -207,8 +197,7 @@ ALTER TABLE public.jobseeker_languages
 ALTER TABLE public.programming_languages
     ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
 
-ALTER TABLE public.jobseeker_pictures
-    ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
+
 
 INSERT INTO cities (city_name)
 VALUES ('ADANA'),

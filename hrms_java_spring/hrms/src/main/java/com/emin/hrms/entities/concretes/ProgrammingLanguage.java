@@ -1,6 +1,7 @@
 package com.emin.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "programming_languages")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","curriculaVitae"})
 public class ProgrammingLanguage {
 
     @Id
@@ -25,10 +27,6 @@ public class ProgrammingLanguage {
     @Column(name = "programming_language_name")
     private String programmingLanguageName;
 
-
-    @JsonIgnore
-    @OneToMany(mappedBy = "programmingLanguage")
-    private List<CurriculaVitae> curriculaVitaes;
 
     @ManyToOne
     @JoinColumn(name = "curricula_vitae_id")

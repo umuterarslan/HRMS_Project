@@ -1,6 +1,7 @@
 package com.emin.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "jobseekers")
 @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","curriculaVitaes"})
 public class JobSeeker extends User {
 
     @Column(name = "first_name")
@@ -31,8 +33,8 @@ public class JobSeeker extends User {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @ManyToOne()
-    @JoinColumn(name = "curricula_vitae_id")
-    private CurriculaVitae curriculaVitae;
+    @JsonIgnore
+    @OneToMany(mappedBy = "jobSeeker")
+    private List<CurriculaVitae> curriculaVitaes;
 
 }
