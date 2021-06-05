@@ -16,12 +16,11 @@ CREATE TABLE public.users
 
 CREATE TABLE public.jobseekers
 (
-    user_id            INTEGER               NOT NULL,
-    curricula_vitae_id INTEGER               NOT NULL,
-    first_name         CHARACTER VARYING(35) NOT NULL,
-    last_name          CHARACTER VARYING(35) NOT NULL,
-    identity_number    CHARACTER VARYING(11) NOT NULL,
-    birth_date         DATE                  NOT NULL,
+    user_id         INTEGER               NOT NULL,
+    first_name      CHARACTER VARYING(35) NOT NULL,
+    last_name       CHARACTER VARYING(35) NOT NULL,
+    identity_number CHARACTER VARYING(11) NOT NULL,
+    birth_date      DATE                  NOT NULL,
     CONSTRAINT pk_jobseekers PRIMARY KEY (user_id),
     CONSTRAINT fk_jobseekers_users FOREIGN KEY (user_id) REFERENCES public.users (id) ON DELETE CASCADE,
     CONSTRAINT uc_jobseekers_identity_number UNIQUE (identity_number)
@@ -43,6 +42,7 @@ CREATE TABLE public.system_personels
 (
     user_id  INTEGER               NOT NULL,
     username CHARACTER VARYING(35) NOT NULL,
+    CONSTRAINT pk_system_personels PRIMARY KEY (user_id),
     CONSTRAINT fk_system_personels_users FOREIGN KEY (user_id) REFERENCES public.users (id) ON DELETE CASCADE
 );
 
@@ -102,11 +102,13 @@ CREATE TABLE public.job_adverts
 CREATE TABLE public.curricula_vitaes
 (
     id                   INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    jobseeker_picture_id INTEGER NOT NULL,
+    jobseeker_id         INTEGER NOT NULL,
     social_media_id      INTEGER NOT NULL,
     cover_letter         CHARACTER VARYING(200),
     picture_url          CHARACTER VARYING(200),
-    CONSTRAINT pk_curricula_vitaes PRIMARY KEY (id)
+    CONSTRAINT pk_curricula_vitaes PRIMARY KEY (id),
+    CONSTRAINT uc_curricula_vitaes_jobseeker_id UNIQUE (jobseeker_id),
+    CONSTRAINT uc_curricula_vitaes_social_media_id UNIQUE (social_media_id)
 );
 
 CREATE TABLE public.educations
@@ -123,8 +125,9 @@ CREATE TABLE public.educations
 CREATE TABLE public.schools
 (
     id          INTEGER                NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    school_name CHARACTER VARYING(100) NOT NULL,
-    CONSTRAINT pk_schools PRIMARY KEY (id)
+    school_name CHARACTER VARYING(100) NOT NULL UNIQUE,
+    CONSTRAINT pk_schools PRIMARY KEY (id),
+    CONSTRAINT uc_schools_school_name UNIQUE (school_name)
 );
 
 CREATE TABLE public.departments
@@ -171,16 +174,17 @@ CREATE TABLE public.social_medias
     CONSTRAINT uc_social_medias_linkedin_username UNIQUE (linkedin_username)
 );
 
-CREATE TABLE public.programming_languages
+CREATE TABLE public.technologies
 (
-    id                        INTEGER                NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    curricula_vitae_id        INTEGER                NOT NULL,
-    programming_language_name CHARACTER VARYING(100) NOT NULL UNIQUE,
-    CONSTRAINT pk_programming_language PRIMARY KEY (id)
+    id                 INTEGER                NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    curricula_vitae_id INTEGER                NOT NULL,
+    technologies       CHARACTER VARYING(200) NOT NULL,
+    CONSTRAINT pk_technologies PRIMARY KEY (id)
 );
 
 ALTER TABLE public.curricula_vitaes
-    ADD FOREIGN KEY (social_media_id) REFERENCES public.social_medias (id);
+    ADD FOREIGN KEY (social_media_id) REFERENCES public.social_medias (id),
+    ADD FOREIGN KEY (jobseeker_id) REFERENCES public.jobseekers (user_id);
 
 ALTER TABLE public.educations
     ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id),
@@ -194,9 +198,8 @@ ALTER TABLE public.jobseeker_languages
     ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id),
     ADD FOREIGN KEY (language_id) REFERENCES public.languages (id);
 
-ALTER TABLE public.programming_languages
+ALTER TABLE public.technologies
     ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
-
 
 
 INSERT INTO cities (city_name)

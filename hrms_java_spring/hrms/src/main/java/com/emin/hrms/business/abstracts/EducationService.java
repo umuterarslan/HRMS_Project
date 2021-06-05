@@ -12,4 +12,6 @@ public interface EducationService {
 
     Result addEducation(Education education);
 
+    DataResult<List<Education>> getAllSorted(int id);
+
 }

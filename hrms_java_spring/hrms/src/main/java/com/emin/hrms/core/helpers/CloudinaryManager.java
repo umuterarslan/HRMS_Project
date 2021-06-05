@@ -43,7 +43,8 @@ public class CloudinaryManager implements CloudinaryService {
     }
 
     private File convertToFile(MultipartFile multipartFile) throws IOException {
-        File file = new File(multipartFile.getOriginalFilename());
+        String path = "D:\\Java-React\\Java\\hrms\\hrms_java_spring\\hrms\\pictures\\";
+        File file = new File(path + multipartFile.getOriginalFilename());
         FileOutputStream stream = new FileOutputStream(file);
         stream.write(multipartFile.getBytes());
         stream.close();

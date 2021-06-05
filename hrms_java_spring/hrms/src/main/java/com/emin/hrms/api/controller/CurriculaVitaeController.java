@@ -28,7 +28,7 @@ public class CurriculaVitaeController {
     }
 
     @GetMapping("/listcvbyjobseekerid")
-    public DataResult<CurriculaVitae> getByJobSeekerId(@RequestParam("Cv id") int id) {
+    public DataResult<CurriculaVitae> getByJobSeekerId(@RequestParam("Jobseeker Id") int id) {
         return this.curriculaVitaeService.getByJobSeekerId(id);
     }
 

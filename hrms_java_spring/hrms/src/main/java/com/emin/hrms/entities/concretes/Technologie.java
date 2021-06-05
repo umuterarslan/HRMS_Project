@@ -14,9 +14,9 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "programming_languages")
+@Table(name = "technologies")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler","curriculaVitae"})
-public class ProgrammingLanguage {
+public class Technologie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,8 @@ public class ProgrammingLanguage {
     @NotNull
     private int id;
 
-    @Column(name = "programming_language_name")
-    private String programmingLanguageName;
+    @Column(name = "technologies")
+    private String technologie;
 
 
     @ManyToOne

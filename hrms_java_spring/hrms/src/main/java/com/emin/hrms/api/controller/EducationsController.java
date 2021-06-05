@@ -26,9 +26,14 @@ public class EducationsController {
         return this.educationService.addEducation(education);
     }
 
-    @GetMapping("/geteucations")
+    @GetMapping("/geteudcations")
     public DataResult<List<Education>> getEducations() {
         return this.educationService.getEducations();
+    }
+
+    @GetMapping("/geteducationssorted")
+    public DataResult getEducationSorted(int id) {
+        return this.educationService.getAllSorted(id);
     }
 
 }

@@ -1,6 +1,5 @@
 package com.emin.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,6 +47,6 @@ public class CurriculaVitae {
     private List<JobSeekerLanguage> jobSeekerLanguages;
 
     @OneToMany(mappedBy = "curriculaVitae")
-    private List<ProgrammingLanguage> programmingLanguages;
+    private List<Technologie> technologies;
 
 }
