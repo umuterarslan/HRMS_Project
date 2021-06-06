@@ -4,13 +4,11 @@ import com.emin.hrms.business.abstracts.JobSeekerLanguageService;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.JobSeekerLanguage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/jobseekerlanguage")
+@CrossOrigin
 public class JobSeekerLanguagesController {
 
     private JobSeekerLanguageService jobSeekerLanguageService;

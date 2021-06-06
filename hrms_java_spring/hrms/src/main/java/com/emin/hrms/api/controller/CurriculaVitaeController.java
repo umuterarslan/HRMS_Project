@@ -13,6 +13,7 @@ import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/curriculavitae")
+@CrossOrigin
 public class CurriculaVitaeController {
 
     private CurriculaVitaeService curriculaVitaeService;

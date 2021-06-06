@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/businesslife")
+@CrossOrigin
 public class BusinessLifeController {
 
     private BusinessLifeService businessLifeService;
@@ -24,8 +25,8 @@ public class BusinessLifeController {
     }
 
     @GetMapping("/getbusinesslifessorted")
-    public DataResult getBusinessLifeSorted(int id) {
-        return this.businessLifeService.getAllSorted(id);
+    public DataResult getBusinessLifeSorted(@RequestParam int id) {
+        return this.businessLifeService.getBusinessLifeEndDateByCurriculaVitaeId(id);
     }
 
 }

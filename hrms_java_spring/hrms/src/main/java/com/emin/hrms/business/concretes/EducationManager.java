@@ -38,7 +38,7 @@ public class EducationManager implements EducationService {
 
     @Override
     public DataResult<List<Education>> getAllSorted(int id) {
-        Sort sort = Sort.by(Sort.Direction.DESC);
+        Sort sort = Sort.by(Sort.Direction.DESC, "endDate");
         if (IsFull.listController(this.educationDao.getEducationEndDateByCurriculaVitaeId(id,sort))) {
             return new SuccessDataResult<>(this.educationDao.getEducationEndDateByCurriculaVitaeId(id,sort),"Eğitim bilgileri sıralı olarak listelendi.");
         } else {

@@ -5,13 +5,11 @@ import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.core.utilities.results.SuccessResult;
 import com.emin.hrms.entities.concretes.SocialMedia;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/socialmedias")
+@CrossOrigin
 public class SocialMediaController {
 
     private SocialMediaService socialMediaService;

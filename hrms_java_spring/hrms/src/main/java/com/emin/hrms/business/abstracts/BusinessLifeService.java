@@ -12,6 +12,6 @@ public interface BusinessLifeService {
 
     Result addBusinessLife(BusinessLife businessLife);
 
-    DataResult<List<Education>> getAllSorted(int id);
+    DataResult<List<BusinessLife>> getBusinessLifeEndDateByCurriculaVitaeId(int id);
 
 }
