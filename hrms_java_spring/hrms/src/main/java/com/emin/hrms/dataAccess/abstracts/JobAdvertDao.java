@@ -2,6 +2,7 @@ package com.emin.hrms.dataAccess.abstracts;
 
 import com.cloudinary.utils.ObjectUtils;
 import com.emin.hrms.entities.concretes.JobAdvert;
+import com.emin.hrms.entities.concretes.SystemPersonel;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -11,7 +12,7 @@ import com.cloudinary.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
-public interface JobAdvertsDao extends JpaRepository<JobAdvert, Integer> {
+public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 
     Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap());
 
@@ -25,6 +26,11 @@ public interface JobAdvertsDao extends JpaRepository<JobAdvert, Integer> {
     @Modifying
     @Query("Update JobAdvert set isActive = false where id =:jobAdvertId")
     void setPasiveJobAdvert(int jobAdvertId);
+
+    JobAdvert getJobAdvertById(int id);
+
+    @Transactional
+    void deleteJobAdvertById(int id);
 
 }
 

@@ -31,4 +31,14 @@ public class EmployerController {
         return employerService.addEmployer(employer);
     }
 
+    @GetMapping("/getemployerbyid")
+    public DataResult<Employer> getEmployerById(int id) {
+        return this.employerService.getEmployerById(id);
+    }
+
+    @DeleteMapping("/deleteemployerbyid")
+    public Result deleteEmployerById(@RequestParam int id) {
+        return this.employerService.deleteEmployerById(id);
+    }
+
 }

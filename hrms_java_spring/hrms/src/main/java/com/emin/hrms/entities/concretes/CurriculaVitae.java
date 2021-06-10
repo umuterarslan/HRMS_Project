@@ -29,24 +29,24 @@ public class CurriculaVitae {
     @Column(name = "picture_url")
     private String pictureUrl;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "social_media_id")
     private SocialMedia socialMedia;
 
-    @ManyToOne()
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "jobseeker_id")
     private JobSeeker jobSeeker;
 
-    @OneToMany(mappedBy = "curriculaVitae")
+    @OneToMany(mappedBy = "curriculaVitae", cascade = CascadeType.ALL)
     private List<Education> educations;
 
-    @OneToMany(mappedBy = "curriculaVitae")
+    @OneToMany(mappedBy = "curriculaVitae", cascade = CascadeType.ALL)
     private List<BusinessLife> businessLifes;
 
-    @OneToMany(mappedBy = "curriculaVitae")
+    @OneToMany(mappedBy = "curriculaVitae", cascade = CascadeType.ALL)
     private List<JobSeekerLanguage> jobSeekerLanguages;
 
-    @OneToMany(mappedBy = "curriculaVitae")
+    @OneToMany(mappedBy = "curriculaVitae", cascade = CascadeType.ALL)
     private List<Technologie> technologies;
 
 }

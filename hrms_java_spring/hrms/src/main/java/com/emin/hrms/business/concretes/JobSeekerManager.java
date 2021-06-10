@@ -5,6 +5,7 @@ import com.emin.hrms.core.services.MernisCheckService;
 import com.emin.hrms.core.utilities.EmailValidator;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.JobSeekerDao;
+import com.emin.hrms.entities.concretes.Employer;
 import com.emin.hrms.entities.concretes.JobSeeker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,21 @@ public class JobSeekerManager implements JobSeekerService {
                 return new ErrorResult("Kimlik numarası sistemde zaten mevcut!");
             }
         }
+    }
+
+    @Override
+    public DataResult<JobSeeker> getJobSeekerById(int id) {
+        if (this.jobSeekerDao.getJobSeekerById(id) != null) {
+            return new SuccessDataResult<>(this.jobSeekerDao.getJobSeekerById(id),"iş veren bilgileri getirildi");
+        } else {
+            return new ErrorDataResult<>(null, "İş veren bilgileri getirme başarısız!");
+        }
+    }
+
+    @Override
+    public Result deleteJobSeekerById(int id) {
+        this.jobSeekerDao.deleteJobSeekerById(id);
+        return new SuccessResult("Silme başarılı.");
     }
 
 }

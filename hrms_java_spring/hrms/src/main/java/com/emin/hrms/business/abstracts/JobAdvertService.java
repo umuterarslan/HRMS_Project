@@ -3,6 +3,7 @@ package com.emin.hrms.business.abstracts;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.JobAdvert;
+import com.emin.hrms.entities.concretes.SystemPersonel;
 
 import java.util.List;
 
@@ -19,5 +20,9 @@ public interface JobAdvertService {
     DataResult<List<JobAdvert>> getActiveJobAdvertsForEmployer(String companyName);
 
     Result setPasiveJobAdvert(int jobAdvertId);
+
+    DataResult<JobAdvert> getJobAdvertById(int id);
+
+    Result deleteJobAdvertById(int id);
 
 }

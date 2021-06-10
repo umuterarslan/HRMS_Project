@@ -3,8 +3,9 @@ package com.emin.hrms.business.concretes;
 import com.emin.hrms.business.abstracts.JobAdvertService;
 import com.emin.hrms.core.utilities.IsFull;
 import com.emin.hrms.core.utilities.results.*;
-import com.emin.hrms.dataAccess.abstracts.JobAdvertsDao;
+import com.emin.hrms.dataAccess.abstracts.JobAdvertDao;
 import com.emin.hrms.entities.concretes.JobAdvert;
+import com.emin.hrms.entities.concretes.SystemPersonel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -14,10 +15,10 @@ import java.util.List;
 @Service
 public class JobAdvertsManager implements JobAdvertService {
 
-    private final JobAdvertsDao jobAdvertsDao;
+    private final JobAdvertDao jobAdvertsDao;
 
     @Autowired
-    public JobAdvertsManager(JobAdvertsDao jobAdvertsDao) {
+    public JobAdvertsManager(JobAdvertDao jobAdvertsDao) {
         this.jobAdvertsDao = jobAdvertsDao;
     }
 
@@ -65,4 +66,20 @@ public class JobAdvertsManager implements JobAdvertService {
         this.jobAdvertsDao.setPasiveJobAdvert(jobAdvertId);
         return new SuccessResult("İş ilanı pasif olarak güncellendi.");
     }
+
+    @Override
+    public DataResult<JobAdvert> getJobAdvertById(int id) {
+        if (this.jobAdvertsDao.getJobAdvertById(id) != null) {
+            return new SuccessDataResult<>(this.jobAdvertsDao.getJobAdvertById(id),"İş ilanı bilgileri getirildi");
+        } else {
+            return new ErrorDataResult<>(null, "İş ilanı bilgileri getirme başarısız!");
+        }
+    }
+
+    @Override
+    public Result deleteJobAdvertById(int id) {
+        this.jobAdvertsDao.deleteJobAdvertById(id);
+        return new SuccessResult("Silme başarılı.");
+    }
+
 }

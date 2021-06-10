@@ -4,6 +4,7 @@ import com.emin.hrms.business.abstracts.EmployerService;
 import com.emin.hrms.core.utilities.EmailValidator;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.EmployerDao;
+import com.emin.hrms.entities.concretes.CurriculaVitae;
 import com.emin.hrms.entities.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,4 +52,21 @@ public class EmployerManager implements EmployerService {
             }
         }
     }
+
+    @Override
+    public DataResult<Employer> getEmployerById(int id) {
+        if (this.employerDao.getEmployerById(id) != null) {
+            return new SuccessDataResult<>(this.employerDao.getEmployerById(id),"iş veren bilgileri getirildi");
+        } else {
+            return new ErrorDataResult<>(null, "İş veren bilgileri getirme başarısız!");
+        }
+    }
+
+    @Override
+    public Result deleteEmployerById(int id) {
+        this.employerDao.deleteEmployerById(id);
+        return new SuccessResult("Silme başarılı.");
+    }
+
+
 }

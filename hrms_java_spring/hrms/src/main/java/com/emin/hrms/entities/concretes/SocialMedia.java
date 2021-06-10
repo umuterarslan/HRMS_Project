@@ -29,7 +29,7 @@ public class SocialMedia {
     private String linkedinUsername;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "socialMedia")
+    @OneToMany(mappedBy = "socialMedia", cascade = CascadeType.ALL)
     private List<CurriculaVitae> curriculaVitaes;
 
 }

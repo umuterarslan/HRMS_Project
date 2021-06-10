@@ -37,7 +37,7 @@ public class Education {
     @JoinColumn(name = "school_id")
     private School school;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "curricula_vitae_id")
     private CurriculaVitae curriculaVitae;
 
