@@ -1,5 +1,5 @@
 import React from "react";
-import { Dropdown, Icon, Input, Menu } from "semantic-ui-react";
+import { Icon, Input, Menu } from "semantic-ui-react";
 
 export const Filter = () => {
     return (
@@ -49,13 +49,34 @@ export const Filter = () => {
                 >
                     Empty
                 </Menu.Item>
-                <Dropdown item text="Empty">
-                    <Dropdown.Menu>
-                        <Dropdown.Item icon="edit" text="Empty" />
-                        <Dropdown.Item icon="globe" text="Empty" />
-                        <Dropdown.Item icon="settings" text="Empty" />
-                    </Dropdown.Menu>
-                </Dropdown>
+                <Menu.Item
+                    name="messages"
+                    // active={activeItem === "messages"}
+                    // onClick={this.handleItemClick}
+                >
+                    Empty
+                </Menu.Item>
+                <Menu.Item
+                    name="messages"
+                    // active={activeItem === "messages"}
+                    // onClick={this.handleItemClick}
+                >
+                    Empty
+                </Menu.Item>
+                <Menu.Item
+                    name="messages"
+                    // active={activeItem === "messages"}
+                    // onClick={this.handleItemClick}
+                >
+                    Empty
+                </Menu.Item>
+                <Menu.Item
+                    name="messages"
+                    // active={activeItem === "messages"}
+                    // onClick={this.handleItemClick}
+                >
+                    Empty
+                </Menu.Item>
             </Menu>
         </div>
     );

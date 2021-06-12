@@ -29,6 +29,7 @@ CREATE TABLE public.jobseekers
 CREATE TABLE public.employers
 (
     user_id      INTEGER                NOT NULL,
+    picture_url  CHARACTER VARYING(200),
     company_name CHARACTER VARYING(255) NOT NULL,
     website      CHARACTER VARYING(255) NOT NULL,
     phone_number CHARACTER VARYING(12)  NOT NULL,
@@ -83,16 +84,19 @@ CREATE TABLE public.cities
 
 CREATE TABLE public.job_adverts
 (
-    id              INTEGER                  NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    employer_id     INTEGER                  NOT NULL,
-    city_id         INTEGER                  NOT NULL,
-    job_position_id INTEGER                  NOT NULL,
-    description     CHARACTER VARYING(25000) NOT NULL,
-    salary          INTEGER                  NOT NULL,
-    position_count  INTEGER                  NOT NULL,
-    release_date    timestamp with time zone NOT NULL,
-    expire_date     DATE                     NOT NULL,
-    is_active       boolean                  NOT NULL,
+    id                       INTEGER                  NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    employer_id              INTEGER                  NOT NULL,
+    city_id                  INTEGER                  NOT NULL,
+    job_position_id          INTEGER                  NOT NULL,
+    description              CHARACTER VARYING(25000) NOT NULL,
+    salary                   INTEGER                  NOT NULL,
+    position_count           INTEGER                  NOT NULL,
+    release_date             timestamp with time zone NOT NULL,
+    expire_date              DATE                     NOT NULL,
+    is_active                boolean                  NOT NULL,
+    is_confirmed             boolean                  NOT NULL,
+    part_or_full_time        CHARACTER VARYING(20)    NOT NULL,
+    remote_or_standart_typed CHARACTER VARYING(20),
     CONSTRAINT pk_job_adverts PRIMARY KEY (id),
     CONSTRAINT fk_job_adverts_job_positions FOREIGN KEY (job_position_id) REFERENCES public.job_positions (id) ON DELETE CASCADE,
     CONSTRAINT fk_job_adverts_cities FOREIGN KEY (city_id) REFERENCES public.cities (id) ON DELETE CASCADE,
@@ -101,11 +105,11 @@ CREATE TABLE public.job_adverts
 
 CREATE TABLE public.curricula_vitaes
 (
-    id                   INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    jobseeker_id         INTEGER NOT NULL,
-    social_media_id      INTEGER NOT NULL,
-    cover_letter         CHARACTER VARYING(200),
-    picture_url          CHARACTER VARYING(200),
+    id              INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    jobseeker_id    INTEGER NOT NULL,
+    social_media_id INTEGER NOT NULL,
+    cover_letter    CHARACTER VARYING(200),
+    picture_url     CHARACTER VARYING(200),
     CONSTRAINT pk_curricula_vitaes PRIMARY KEY (id),
     CONSTRAINT uc_curricula_vitaes_jobseeker_id UNIQUE (jobseeker_id),
     CONSTRAINT uc_curricula_vitaes_social_media_id UNIQUE (social_media_id)

@@ -8,38 +8,46 @@ body {
     background-attachment: fixed !important;
 }
 
-/* .navbar {
+.navbar {
     width: 100%;
     height: 15%;
     position: fixed;
     top: 0;
     z-index: 10;
     background-color: white;
-} */
+}
 
 .list-jobs {
     background-color: black;
 }
 
 .find-job-container {
-    margin: 3% 0;
+    margin: 5% 0;
 }
 
 .find-job-filter {
     position: fixed;
     left: 20%x;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .footer {
     width: 100%;
     height: 8rem;
-    background-color: #1b1c1d;
+    background-color: white;
     text-align: center;
-    color: white;
-    position: fixed;
-    bottom: 0;
+    color: black;
 }
 
-job-adverts-list:not(:last-child) {
-    padding-bottom: 2rem;
+.job-advert-card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
 }
+
+.job-advert-card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* job-adverts-list:not(:last-child) {
+    padding-bottom: 2rem;
+} */
