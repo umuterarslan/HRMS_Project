@@ -96,15 +96,17 @@ export default function JobAdvertDetail() {
                                         <Table.Cell>
                                             <b>Yarı/Tam Zaman Şekli</b>
                                         </Table.Cell>
-                                        <Table.Cell>Gelecek...</Table.Cell>
+                                        <Table.Cell>
+                                            {jobAdvert.partOrFullTime}
+                                        </Table.Cell>
                                     </Table.Row>
                                     <Table.Row>
                                         <Table.Cell>
-                                            <b>
-                                                Uzaktan/Standart Çalışma Şekli
-                                            </b>
+                                            <b>Uzaktan/Ofisten Çalışma Şekli</b>
                                         </Table.Cell>
-                                        <Table.Cell>Gelecek...</Table.Cell>
+                                        <Table.Cell>
+                                            {jobAdvert.remoteOrStandartTyped}
+                                        </Table.Cell>
                                     </Table.Row>
                                     <Table.Row>
                                         <Table.Cell>

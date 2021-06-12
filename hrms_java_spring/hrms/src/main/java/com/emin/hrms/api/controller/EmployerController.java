@@ -6,7 +6,9 @@ import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -41,4 +43,8 @@ public class EmployerController {
         return this.employerService.deleteEmployerById(id);
     }
 
+    @PostMapping("/addemployerpicture")
+    public Result addEmployerPicture(int employerId, MultipartFile file) throws IOException {
+        return this.employerService.uploadPicture(employerId ,file);
+    }
 }

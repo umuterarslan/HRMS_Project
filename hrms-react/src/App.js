@@ -7,6 +7,7 @@ import JobAdvertDetail from "./components/JobAdvertDetail";
 import { Container } from "semantic-ui-react";
 import { Footer } from "./components/Footer";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import SignUp from "./components/SignUp";
 
 function App() {
     return (
@@ -16,7 +17,7 @@ function App() {
                 minHeight: "50rem",
             }}
         >
-            <Navi />
+            <Navi className="nav-bar" />
             <Container className="find-job-container">
                 <Router>
                     <Route exact path="/" component={FindJob} />
@@ -25,6 +26,7 @@ function App() {
                         path="/jobAdvertDetail/:id"
                         component={JobAdvertDetail}
                     />
+                    <Route exact path="/signup" component={SignUp} />
                 </Router>
             </Container>
             {/* <div className="footer">

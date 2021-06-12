@@ -10,6 +10,15 @@ export default class EmployerService {
         });
     }
 
+    addPictureToEmployer(id, picture) {
+        axios({
+            method: "POST",
+            url: `http://localhost:8080/api/employers/addemployerpicture?employerId=${id}`,
+            data: picture,
+            headers: "content-type: application/json",
+        });
+    }
+
     deleteEmployerById(id) {
         axios.delete(
             `http://localhost:8080/api/employers/deleteemployerbyid?id=${id}`

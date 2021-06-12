@@ -23,6 +23,9 @@ public class Employer extends User {
     @Column(name = "company_name")
     private String companyName;
 
+    @Column(name = "picture_url")
+    private String pictureUrl;
+
     @Column(name = "website")
     private String website;
 

@@ -1,6 +1,7 @@
 package com.emin.hrms.business.concretes;
 
 import com.emin.hrms.business.abstracts.EmployerService;
+import com.emin.hrms.core.helpers.CloudinaryService;
 import com.emin.hrms.core.utilities.EmailValidator;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.EmployerDao;
@@ -8,17 +9,21 @@ import com.emin.hrms.entities.concretes.CurriculaVitae;
 import com.emin.hrms.entities.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @Service
 public class EmployerManager implements EmployerService {
 
     private final EmployerDao employerDao;
+    private CloudinaryService cloudinaryService;
 
     @Autowired
-    public EmployerManager(EmployerDao employerDao) {
+    public EmployerManager(EmployerDao employerDao, CloudinaryService cloudinaryService) {
         this.employerDao = employerDao;
+        this.cloudinaryService = cloudinaryService;
     }
 
     @Override
@@ -66,6 +71,16 @@ public class EmployerManager implements EmployerService {
     public Result deleteEmployerById(int id) {
         this.employerDao.deleteEmployerById(id);
         return new SuccessResult("Silme başarılı.");
+    }
+
+    @Override
+    public Result uploadPicture(int employerId, MultipartFile file) throws IOException {
+        var result = this.cloudinaryService.upload(file);
+        var url = result.getData().get("url");
+        Employer employer = this.employerDao.getOne(employerId);
+        employer.setPictureUrl(url.toString());
+        this.employerDao.save(employer);
+        return new SuccessResult("Başarılı.");
     }
 
 

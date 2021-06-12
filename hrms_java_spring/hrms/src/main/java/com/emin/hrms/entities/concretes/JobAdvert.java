@@ -54,4 +54,13 @@ public class JobAdvert {
     @Column(name = "is_active")
     private boolean isActive = true;
 
+    @Column(name = "is_confirmed")
+    private boolean isConfirmed = false;
+
+    @Column(name = "part_or_full_time")
+    private String partOrFullTime;
+
+    @Column(name = "remote_or_standart_typed")
+    private String remoteOrStandartTyped;
+
 }

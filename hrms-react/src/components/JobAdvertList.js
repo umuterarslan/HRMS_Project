@@ -13,27 +13,15 @@ export default function JobAdvertList() {
             .then((success) => setJobAderts(success.data.data));
     });
 
-    const withoutHover = {
-        boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2)",
-        transition: "0.3s",
-    };
-
-    const withHover = {
-        boxShadow: "0 8px 16px 0 rgba(0, 0, 0, 0.2)",
-        transition: "0.3s",
-    };
-
-    const [isHovering, setIsHovering] = useState(withoutHover);
-
     return (
         <div>
             <CardGroup>
                 {jobAdverts.map((jobAdvert) => (
-                    <Card fluid>
+                    <Card style={{ minWidth: "70%" }}>
                         <Card.Content
-                            style={isHovering}
-                            onMouseEnter={() => setIsHovering(withHover)}
-                            onMouseLeave={() => setIsHovering(withoutHover)}
+                            style={{
+                                boxShadow: "0 6px 8px 0 rgba(0, 0, 0, 0.2)",
+                            }}
                         >
                             <Image
                                 floated="right"

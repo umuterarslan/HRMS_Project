@@ -16,16 +16,23 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 
     Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap());
 
-    List<JobAdvert> findAllByIsActiveTrue();
+    List<JobAdvert> getAllByIsActiveTrue();
 
     List<JobAdvert> getJobAdvertByIsActiveTrueAndEmployer_CompanyName(String companyName);
 
-    List<JobAdvert> findAllByIsActiveTrue(Sort sort);
+    List<JobAdvert> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(Sort sort);
+
+    List<JobAdvert> getAllByIsActiveTrue(Sort sort);
 
     @Transactional
     @Modifying
-    @Query("Update JobAdvert set isActive = false where id =:jobAdvertId")
-    void setPasiveJobAdvert(int jobAdvertId);
+    @Query("Update JobAdvert set isActive = :state where id =:jobAdvertId")
+    void changeActiveJobAdvert(int jobAdvertId, boolean state);
+
+    @Transactional
+    @Modifying
+    @Query("Update JobAdvert set isConfirmed = :state where id =:jobAdvertId")
+    void changeConfirmedJobAdvert(int jobAdvertId, boolean state);
 
     JobAdvert getJobAdvertById(int id);
 

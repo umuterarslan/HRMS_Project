@@ -33,7 +33,7 @@ public class CurriculaVitaeController {
         return this.curriculaVitaeService.getByJobSeekerId(id);
     }
 
-    @PostMapping("/addPicture")
+    @PostMapping("/addcvpicture")
     public Result addPicture(int jobSeekerId,MultipartFile file) throws IOException {
         return this.curriculaVitaeService.uploadPicture(jobSeekerId,file);
     }

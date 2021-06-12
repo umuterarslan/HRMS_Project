@@ -4,7 +4,6 @@ import com.emin.hrms.business.abstracts.JobAdvertService;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.JobAdvert;
-import com.emin.hrms.entities.concretes.SystemPersonel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,8 +37,8 @@ public class JobAdvertsController {
     }
 
     @GetMapping("/getActiveJobAdvertsSorted")
-    public DataResult<List<JobAdvert>> findByAllByIsActiveTrueSorted() {
-        return this.jobAdvertService.findAllByIsActiveTrue();
+    public DataResult<List<JobAdvert>> getByAllByIsActiveTrueSorted(@RequestParam("is desc") boolean isDesc) {
+        return this.jobAdvertService.getAllByIsActiveTrue(isDesc);
     }
 
     @GetMapping("/getJobAdvertsForCompanyName")
@@ -47,9 +46,14 @@ public class JobAdvertsController {
         return this.jobAdvertService.getActiveJobAdvertsForEmployer(companyName);
     }
 
-    @PostMapping("/setPasiveJobAdvert")
-    public Result setPasiveJobAdvert(@RequestParam("id") int jobAdvertId) {
-        return this.jobAdvertService.setPasiveJobAdvert(jobAdvertId);
+    @PostMapping("/changeActiveJobAdvert")
+    public Result changeActiveJobAdvert(@RequestParam("id") int jobAdvertId, @RequestParam("state") boolean state) {
+        return this.jobAdvertService.changeActiveJobAdvert(jobAdvertId, state);
+    }
+
+    @PostMapping("/changeconfirmedjobadvert")
+    public Result changeConfirmedJobAdvert(@RequestParam("id") int jobAdvertId, @RequestParam("state") boolean state) {
+        return this.jobAdvertService.changeConfirmedJobAdvert(jobAdvertId, state);
     }
 
     @GetMapping("/getjobadvertyid")
@@ -60,6 +64,11 @@ public class JobAdvertsController {
     @DeleteMapping("/deletejobadvertbyid")
     public Result deleteJobAdvertById(@RequestParam int id) {
         return this.jobAdvertService.deleteJobAdvertById(id);
+    }
+
+    @GetMapping("/getjobadvertbyisactivetrueandisconfirmedtrue")
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(boolean isDesc) {
+        return this.jobAdvertService.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(isDesc);
     }
 
 }

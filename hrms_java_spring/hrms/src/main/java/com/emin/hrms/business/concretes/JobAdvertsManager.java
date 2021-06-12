@@ -7,6 +7,7 @@ import com.emin.hrms.dataAccess.abstracts.JobAdvertDao;
 import com.emin.hrms.entities.concretes.JobAdvert;
 import com.emin.hrms.entities.concretes.SystemPersonel;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -35,18 +36,23 @@ public class JobAdvertsManager implements JobAdvertService {
 
     @Override
     public DataResult<List<JobAdvert>> getActiveJobAdverts() {
-        if (IsFull.listController(this.jobAdvertsDao.findAllByIsActiveTrue())) {
-            return new SuccessDataResult<>(this.jobAdvertsDao.findAllByIsActiveTrue(), "Aktif iş ilanları istelendi.");
+        if (IsFull.listController(this.jobAdvertsDao.getAllByIsActiveTrue())) {
+            return new SuccessDataResult<>(this.jobAdvertsDao.getAllByIsActiveTrue(), "Aktif iş ilanları istelendi.");
         } else {
             return new SuccessDataResult<>(null, "Listelenecek aktif iş ilanı bulunamadı.");
         }
     }
 
     @Override
-    public DataResult<List<JobAdvert>> findAllByIsActiveTrue() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "releaseDate");
-        if (IsFull.listController(this.jobAdvertsDao.findAllByIsActiveTrue())) {
-            return new SuccessDataResult<>(this.jobAdvertsDao.findAllByIsActiveTrue(sort), "Aktif iş ilanları yeniden eskiye sıralama ile listelendi.");
+    public DataResult<List<JobAdvert>> getAllByIsActiveTrue(boolean isDesc) {
+        Sort sort;
+        if (isDesc) {
+            sort = Sort.by(Sort.Direction.DESC, "releaseDate");
+        } else {
+            sort = Sort.by(Sort.Direction.ASC, "releaseDate");
+        }
+        if (IsFull.listController(this.jobAdvertsDao.getAllByIsActiveTrue())) {
+            return new SuccessDataResult<>(this.jobAdvertsDao.getAllByIsActiveTrue(sort), "Aktif iş ilanları yeniden eskiye sıralama ile listelendi.");
         } else {
             return new SuccessDataResult<>(null, "Sıralanacak aktif iş ilanı bulunamadı!");
         }
@@ -62,9 +68,26 @@ public class JobAdvertsManager implements JobAdvertService {
     }
 
     @Override
-    public Result setPasiveJobAdvert(int jobAdvertId) {
-        this.jobAdvertsDao.setPasiveJobAdvert(jobAdvertId);
-        return new SuccessResult("İş ilanı pasif olarak güncellendi.");
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(boolean isDesc) {
+        Sort sort;
+        if (isDesc){
+            sort = Sort.by(Sort.Direction.DESC, "releaseDate");
+        } else {
+            sort = Sort.by(Sort.Direction.ASC, "releaseDate");
+        }
+        return new SuccessDataResult<>(this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(sort));
+    }
+
+    @Override
+    public Result changeActiveJobAdvert(int jobAdvertId, boolean state) {
+        this.jobAdvertsDao.changeActiveJobAdvert(jobAdvertId, state);
+        return new SuccessResult("İş ilanı aktifliği değiştirme başarılı.");
+    }
+
+    @Override
+    public Result changeConfirmedJobAdvert(int jobAdvertId, boolean state) {
+        this.jobAdvertsDao.changeConfirmedJobAdvert(jobAdvertId, state);
+        return new SuccessResult("İş ilanı onayı değiştirme başarılı.");
     }
 
     @Override
