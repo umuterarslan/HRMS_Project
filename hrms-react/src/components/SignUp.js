@@ -8,6 +8,7 @@ export default function SignUp() {
         backgroundColor: "#fff",
         color: "#00a8ff",
         boxShadow: "0 2px 2px 2px rgba(0, 0, 0, 0.1)",
+        border: "solid 2px #fff",
     };
 
     const [isJobSeeker, setIsJobSeeker] = useState(true);
@@ -31,6 +32,7 @@ export default function SignUp() {
                 </h1>
                 <Button.Group size="huge">
                     <Button
+                        className="employer-jobseeker-button"
                         style={signUpButtons}
                         onClick={() => setIsJobSeeker(true)}
                     >
@@ -38,6 +40,7 @@ export default function SignUp() {
                     </Button>
                     <Button.Or text="veya" />
                     <Button
+                        className="employer-jobseeker-button"
                         style={signUpButtons}
                         onClick={() => setIsJobSeeker(false)}
                     >
@@ -46,11 +49,11 @@ export default function SignUp() {
                 </Button.Group>
             </Container>
             <Container
-                floated="center"
-                alignContent="center"
+                // floated="center"
+                // alignContent="center"
                 style={{
-                    marginTop: "2.5rem",
-                    paddingLeft: "25rem",
+                    marginTop: "1.5rem",
+                    paddingLeft: "29rem",
                 }}
             >
                 {isJobSeeker ? <SignUpJobSeeker /> : <SignUpEmployer />}

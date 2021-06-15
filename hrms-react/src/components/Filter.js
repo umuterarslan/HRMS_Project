@@ -1,5 +1,6 @@
 import React from "react";
 import { Icon, Input, Menu } from "semantic-ui-react";
+import JobAdvertService from "../services/jobAdvertService";
 
 export const Filter = () => {
     return (

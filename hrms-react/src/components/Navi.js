@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState, initialState } from "react";
 import { Container, Menu, Button } from "semantic-ui-react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navi() {
     return (
@@ -12,29 +14,17 @@ export default function Navi() {
                 }}
             >
                 <Container>
-                    <Menu.Item
-                        name="İş İlanları"
-                        // active={activeItem === "home"}
-                        // onClick={this.handleItemClick}
-                    >
-                        <Button>Ana Sayfa</Button>
-                    </Menu.Item>
-                    <Menu.Item
-                        name="İş İlanları"
-                        // active={activeItem === "messages"}
-                        // onClick={this.handleItemClick}
-                    />
-                    <Menu.Item position="right">
-                        <Button
-                            style={{
-                                backgroundColor: "#fff",
-                                border: "solid 1.5px #00a8ff",
-                                color: "#00a8ff",
-                            }}
-                        >
-                            Sign In
-                        </Button>
-                    </Menu.Item>
+                    <Router>
+                        <Menu.Item>
+                            <Link to="/findJob">İş Bul</Link>
+                        </Menu.Item>
+                        <Menu.Item>
+                            <Link to="/findJob">İş Bul</Link>
+                        </Menu.Item>
+                        <Menu.Item position="right">
+                            <Link to="/signin">Üyelik</Link>
+                        </Menu.Item>
+                    </Router>
                 </Container>
             </Menu>
         </div>

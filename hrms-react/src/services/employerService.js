@@ -1,13 +1,19 @@
 import axios from "axios";
 
 export default class EmployerService {
-    addEmployer(employer) {
-        axios({
+    async addEmployer(employer) {
+        return await axios({
             method: "POST",
             url: "http://localhost:8080/api/employers/addemployer",
             data: employer,
-            headers: "content-type: application/json",
-        });
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
+        })
+            .then((res) => {
+                return res.data.message;
+            })
+            .catch((err) => {
+                return err;
+            });
     }
 
     addPictureToEmployer(id, picture) {
@@ -15,7 +21,7 @@ export default class EmployerService {
             method: "POST",
             url: `http://localhost:8080/api/employers/addemployerpicture?employerId=${id}`,
             data: picture,
-            headers: "content-type: application/json",
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
         });
     }
 

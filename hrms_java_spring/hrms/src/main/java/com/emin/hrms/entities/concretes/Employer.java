@@ -32,9 +32,6 @@ public class Employer extends User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @Transient
-    private String confirmPassword;
-
     @OneToMany(mappedBy = "employer")
     @JsonIgnore
     private List<JobAdvert> jobAdverts;

@@ -1,13 +1,19 @@
 import axios from "axios";
 
 export default class CurriculaVitaeService {
-    addCv(curriculaVitae) {
-        axios({
+    async addCv(curriculaVitae) {
+        return await axios({
             method: "POST",
             url: "http://localhost:8080/api/curriculavitae/addcv",
             data: CurriculaVitaeService,
-            headers: "content-type: application/json",
-        });
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
+        })
+            .then((res) => {
+                return res.data.message;
+            })
+            .catch((err) => {
+                return err;
+            });
     }
 
     addPictureToCv(picture, id) {
