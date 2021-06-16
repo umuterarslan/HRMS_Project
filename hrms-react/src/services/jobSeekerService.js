@@ -9,7 +9,7 @@ export default class JobSeekerSerive {
             headers: { "Content-Type": "application/json;charset=UTF-8" },
         })
             .then((res) => {
-                return res.data.message;
+                return res.data;
             })
             .catch((err) => {
                 return err;

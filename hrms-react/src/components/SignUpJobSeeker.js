@@ -3,22 +3,26 @@ import { Button, Container } from "semantic-ui-react";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import JobSeekerService from "../services/jobSeekerService";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUpJobSeeker() {
     const jobSeekerService = new JobSeekerService();
 
     return (
         <div>
+            <ToastContainer />
             <Container>
                 <Formik
                     initialValues={{
                         id: 0,
-                        firstName: "",
-                        lastName: "",
-                        identityNumber: "",
-                        email: "",
-                        password: "",
-                        confirmPassword: "",
+                        firstName: "elma",
+                        lastName: "elma",
+                        identityNumber: "11111111116",
+                        email: "elma@gmail.com",
+                        birthDate: "1010-10-10",
+                        password: "123123",
+                        confirmPassword: "123123",
                         termsAccepted: false,
                     }}
                     validationSchema={Yup.object({
@@ -57,9 +61,22 @@ export default function SignUpJobSeeker() {
                     })}
                     onSubmit={(values) => {
                         if (!values.termsAccepted) {
-                            console.log("Sözleşme kabul edilmeli!");
+                            console.log("Kullanıcı sözleşmesi kabul edilmeli!");
+                            toast.error(
+                                "Kullanıcı sözleşmesi kabul edilmeli!",
+                                {
+                                    draggable: true,
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    transition: Bounce,
+                                }
+                            );
                         } else if (values.password !== values.confirmPassword) {
-                            console.log("Parola doğrulaması hatalı!");
+                            console.log("Parola doğrulaması başarısız!");
+                            toast.error("Parola doğrulaması başarısız!", {
+                                draggable: true,
+                                position: toast.POSITION.TOP_RIGHT,
+                                transition: Bounce,
+                            });
                         } else {
                             const regulated = {
                                 birthDate: values.birthDate,
@@ -73,8 +90,20 @@ export default function SignUpJobSeeker() {
                             jobSeekerService
                                 .addJobSeeker(regulated)
                                 .then((res) => {
-                                    console.log(res);
-                                    alert(res);
+                                    console.log(res.message);
+                                    if (res.success === false) {
+                                        toast.error(res.message, {
+                                            draggable: true,
+                                            position: toast.POSITION.TOP_RIGHT,
+                                            transition: Bounce,
+                                        });
+                                    } else {
+                                        toast.success(res.message, {
+                                            draggable: true,
+                                            position: toast.POSITION.TOP_RIGHT,
+                                            transition: Zoom,
+                                        });
+                                    }
                                 })
                                 .catch((err) => {
                                     console.log(err);
@@ -93,7 +122,7 @@ export default function SignUpJobSeeker() {
                     }) => (
                         <Form
                             onSubmit={handleSubmit}
-                            className="sign-up-form"
+                            className="sign-up-in-form"
                             style={{
                                 width: "30rem",
                             }}
@@ -101,7 +130,7 @@ export default function SignUpJobSeeker() {
                             <input
                                 id="firstName"
                                 type="text"
-                                placeholder="Elijah"
+                                placeholder="Ad"
                                 value={values.firstName}
                                 onChange={handleChange}
                             />
@@ -159,7 +188,7 @@ export default function SignUpJobSeeker() {
                                 <div>{errors.password}</div>
                             ) : null}
                             <input
-                                id="passwordConfirm"
+                                id="confirmPassword"
                                 type="password"
                                 placeholder="Parola Tekrar"
                                 value={values.confirmPassword}

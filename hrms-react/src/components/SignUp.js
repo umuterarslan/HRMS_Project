@@ -24,7 +24,7 @@ export default function SignUp() {
                 <h1
                     style={{
                         color: "#ffff",
-                        textShadow: "#00a8ff 1px 3px 1px",
+                        textShadow: "#0984e3 1px 1px 0.8rem",
                         fontSize: "4rem",
                     }}
                 >

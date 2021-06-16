@@ -3,22 +3,25 @@ import { Button, Container } from "semantic-ui-react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import EmployerService from "../services/employerService";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SingUpEmployer() {
     const employerService = new EmployerService();
 
     return (
         <div>
+            <ToastContainer />
             <Container>
                 <Formik
                     initialValues={{
                         id: 0,
-                        companyName: "",
-                        confirmPassword: "",
-                        email: "",
-                        password: "",
-                        phoneNumber: "",
-                        website: "",
+                        companyName: "lale",
+                        confirmPassword: "123123",
+                        email: "self@lale.com",
+                        password: "123123",
+                        phoneNumber: "4444444",
+                        website: "www.lale.com",
                         termsAccepted: false,
                     }}
                     validationSchema={Yup.object({
@@ -50,9 +53,22 @@ export default function SingUpEmployer() {
                     })}
                     onSubmit={(values) => {
                         if (!values.termsAccepted) {
-                            console.log("Sözleşme kabul edilmeli!");
+                            console.log("Kullanıcı sözleşmesi kabul edilmeli!");
+                            toast.error(
+                                "Kullanıcı sözleşmesi kabul edilmeli!",
+                                {
+                                    draggable: true,
+                                    position: toast.POSITION.TOP_RIGHT,
+                                    transition: Bounce,
+                                }
+                            );
                         } else if (values.password !== values.confirmPassword) {
-                            console.log("Parola doğrulaması hatalı!");
+                            console.log("Parola doğrulaması başarısız!");
+                            toast.error("Parola doğrulaması başarısız!", {
+                                draggable: true,
+                                position: toast.POSITION.TOP_RIGHT,
+                                transition: Bounce,
+                            });
                         } else {
                             const regulated = {
                                 companyName: values.companyName,
@@ -65,8 +81,20 @@ export default function SingUpEmployer() {
                             employerService
                                 .addEmployer(regulated)
                                 .then((res) => {
-                                    console.log(res);
-                                    alert(res);
+                                    console.log(res.message);
+                                    if (res.success === false) {
+                                        toast.error(res.message, {
+                                            draggable: true,
+                                            position: toast.POSITION.TOP_RIGHT,
+                                            transition: Bounce,
+                                        });
+                                    } else {
+                                        toast.success(res.message, {
+                                            draggable: true,
+                                            position: toast.POSITION.TOP_RIGHT,
+                                            transition: Zoom,
+                                        });
+                                    }
                                 })
                                 .catch((err) => {
                                     console.log(err);
@@ -74,17 +102,9 @@ export default function SingUpEmployer() {
                         }
                     }}
                 >
-                    {({
-                        values,
-                        errors,
-                        touched,
-                        handleSubmit,
-                        handleChange,
-                        isSubmitting,
-                        dirty,
-                    }) => (
+                    {({ values, errors, touched, handleChange }) => (
                         <Form
-                            className="sign-up-form"
+                            className="sign-up-in-form"
                             style={{
                                 width: "30rem",
                             }}
