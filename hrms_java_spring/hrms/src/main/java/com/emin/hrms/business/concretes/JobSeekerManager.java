@@ -1,6 +1,7 @@
 package com.emin.hrms.business.concretes;
 
 import com.emin.hrms.business.abstracts.JobSeekerService;
+import com.emin.hrms.core.services.EmailSenderService;
 import com.emin.hrms.core.services.MernisCheckService;
 import com.emin.hrms.core.utilities.EmailValidator;
 import com.emin.hrms.core.utilities.results.*;
@@ -17,11 +18,13 @@ public class JobSeekerManager implements JobSeekerService {
 
     private final JobSeekerDao jobSeekerDao;
     private final MernisCheckService mernisCheckService;
+    private final EmailSenderService emailSenderService;
 
     @Autowired
-    public JobSeekerManager(JobSeekerDao jobSeekerDao, MernisCheckService mernisCheckService) {
+    public JobSeekerManager(JobSeekerDao jobSeekerDao, MernisCheckService mernisCheckService, EmailSenderService emailSenderService) {
         this.jobSeekerDao = jobSeekerDao;
         this.mernisCheckService = mernisCheckService;
+        this.emailSenderService = emailSenderService;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class JobSeekerManager implements JobSeekerService {
                 return new ErrorResult("Kayıt olan kişinin kimlik numarası gerçek değil!");
             } else {
                 this.jobSeekerDao.save(jobSeeker);
-                return new SuccessResult("İş arayan olarak kayıt olundu! Eposta adresinizden üyeliğinizi onaylayınız.");
+                return new SuccessResult("İş arayan olarak kayıt olundu! " + emailSenderService.emailSender(jobSeeker) );
             }
         } catch (Exception e) {
             if (e.getMessage()

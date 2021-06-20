@@ -1,4 +1,4 @@
-package com.emin.hrms.core.helpers;
+package com.emin.hrms.CloudinaryImageUploader;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Service
-public class CloudinaryManager implements CloudinaryService {
+public class CloudinaryManager{
 
     private Cloudinary cloudinary;
 
@@ -27,7 +27,6 @@ public class CloudinaryManager implements CloudinaryService {
                 "api_secret", "FxKS570tCPRYlZdnkbk-sh0pxpM"));
     }
 
-    @Override
     public DataResult<Map> upload(MultipartFile multipartFile) throws IOException {
         Map<String, Object> options = new HashMap<>();
         var allowedFormats = Arrays.asList("png", "jpg", "jpeg");

@@ -5,9 +5,8 @@ import com.emin.hrms.core.services.MernisCheckService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MernisValidatorManager implements MernisCheckService {
+public class MernisValidatorManager {
 
-    @Override
     public boolean isMernis(JobSeeker jobSeeker) {
         return jobSeeker.getIdentityNumber().length() == 11;
     }

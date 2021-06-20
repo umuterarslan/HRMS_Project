@@ -11,6 +11,7 @@ body {
     ) !important; */
     background-repeat: no-repeat !important;
     background-attachment: fixed !important;
+    min-height: 60rem;
 }
 
 ::-webkit-scrollbar {
@@ -29,6 +30,19 @@ body {
 
 ::-webkit-scrollbar-thumb:focus {
     background: #777;
+}
+
+.nav-bar .ui.menu .item {
+    color: #fff !important;
+    font-weight: 600;
+    max-height: 4.5rem;
+    margin: 0px 5px;
+    border-left: solid 1px #fff;
+    border-right: solid 1px #fff;
+}
+
+.nav-bar .ui.menu .item:hover {
+    background-color: #0984e3 !important;
 }
 
 .list-jobs {
@@ -53,15 +67,19 @@ body {
     color: black;
 }
 
+.employer-jobseeker-button {
+    color: #1e90ff !important;
+}
+
 .employer-jobseeker-button:active {
     border: solid 2px #00a8ff !important;
 }
 
-.sign-up-in-form {
+.sign-up-form {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
-.sign-up-in-form input {
+.sign-up-form input {
     height: 3.5rem;
     border: solid 2px #b2bec3 !important;
     box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.1) !important;
@@ -72,7 +90,7 @@ body {
     padding-left: 1rem;
 }
 
-.sign-up-in-form input::placeholder {
+.sign-up-form input::placeholder {
     color: #b2bec3 !important;
     text-shadow: #7f8fa6 0.4px 0.4px 0.4px;
     font-size: 1rem !important;
@@ -80,25 +98,23 @@ body {
     transition: border 0.8;
 }
 
-.sign-up-in-form input:focus {
+.sign-up-form input:focus {
     transition: all 1s !important;
     border: solid 3px #00a8ff !important;
 }
 
-.sign-up-in-form button {
-    background-color: #fff !important;
-    border: solid 3px #b2bec3 !important;
-    color: #b2bec3 !important;
+.sign-up-form button {
+    background-color: #0652dd !important;
+    border: solid 3px #0652dd !important;
+    color: #fff !important;
     transition: all 0.5s !important;
+    margin-top: 2rem !important;
+    width: 8rem !important;
+    margin-right: 7rem !important;
 }
 
-.sign-up-in-form button {
-    background-color: #fff !important;
-}
-
-.sign-up-in-form button:hover {
-    border: solid 3px #00a8ff !important;
-    color: #00a8ff !important;
+.sign-up-form button:hover {
+    background-color: #0984e3 !important;
 }
 
 .checkbox-div {
@@ -108,13 +124,58 @@ body {
     font-size: 0.85rem !important;
 }
 
-.sign-up-in-form div {
-    color: red;
-}
-
-.sign-up-in-form input[type="checkbox"] {
+.sign-up-form input[type="checkbox"] {
     width: 1.1rem;
     height: 1.1rem;
     display: inline;
     margin-right: 1rem !important;
+    cursor: pointer;
+}
+
+.sign-up-form label {
+    color: #0984e3;
+    font-size: 12px !important;
+}
+
+.sign-up-form div {
+    max-height: 1px !important;
+    margin-bottom: 0.1px;
+    font-size: 12.5px;
+    color: #ff6348 !important;
+}
+
+.sign-in-form input {
+    border: solid 2px #b2bec3 !important;
+    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.1) !important;
+    width: 18rem;
+    height: 4rem;
+    margin: 1rem 2.5rem;
+    border-radius: 2px !important;
+    padding-left: 1rem;
+}
+
+.sign-in-form input::placeholder {
+    color: #b2bec3 !important;
+    text-shadow: #7f8fa6 0.4px 0.4px 0.4px;
+    font-size: 1rem !important;
+    padding-bottom: 0.5rem;
+    transition: border 0.8;
+}
+
+.sign-in-form input:focus {
+    transition: all 1s !important;
+    border: solid 3px #00a8ff !important;
+}
+
+.sign-in-form button {
+    background-color: #0652dd !important;
+    border: solid 3px #0652dd !important;
+    color: #fff !important;
+    transition: all 0.5s !important;
+    margin-top: 1.2rem !important;
+    margin-left: 13.9rem !important;
+}
+
+.sign-in-form button:hover {
+    background-color: #0984e3 !important;
 }

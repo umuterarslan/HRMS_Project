@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Container } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 
@@ -14,9 +15,12 @@ export default function SignIn() {
                 <h1
                     style={{
                         color: "#fff",
-                        textShadow: "#0984e3 1px 1px 0.8rem",
+                        textShadow: "#0652dd 1px 1px .5rem",
                         fontSize: "4rem",
                         textAlign: "center",
+                        marginTop: "8rem",
+                        borderBottom: "solid 4px #0652DD",
+                        paddingBottom: "1rem",
                     }}
                 >
                     Giriş yap
@@ -39,51 +43,53 @@ export default function SignIn() {
                             ),
                     })}
                 >
-                    {({
-                        values,
-                        errors,
-                        touched,
-                        handleSubmit,
-                        handleChange,
-                        isSubmitting,
-                        dirty,
-                    }) => (
-                        <Form
-                            className="sign-up-in-form"
+                    {({ values, errors, touched, handleChange }) => (
+                        <Container
+                            className="sign-in-form"
                             style={{
-                                width: "23.3rem",
-                                margin: "7rem auto",
-                                border: "solid 2px #b2bec3",
-                                height: "19rem",
+                                width: "23.58rem",
+                                marginTop: "5rem",
+                                border: "solid 4px #0652dd",
+                                borderRadius: "8px",
+                                height: "24rem",
                                 paddingTop: "3rem",
-                                backgroundColor: "#dfe6e9",
-                                boxShadow: "2px 2px 2px 2px rgba(0, 0, 0, 0.1)",
+                                backgroundColor: "#fff",
+                                boxShadow:
+                                    "8px 8px 10px 2px rgba(9, 132, 227, 0.4)",
                             }}
                         >
-                            <input
-                                id="email"
-                                type="email"
-                                placeholder="E-Posta"
-                                value={values.email}
-                                onChange={handleChange}
-                            />
-                            {errors.email && touched.email ? (
-                                <div>{errors.email}</div>
-                            ) : null}
-                            <input
-                                id="password"
-                                type="password"
-                                placeholder="Parola"
-                                value={values.password}
-                                onChange={handleChange}
-                            />
-                            {errors.password && touched.password ? (
-                                <div>{errors.password}</div>
-                            ) : null}
-                            <Button floated="right" type="submit">
-                                Giriş Yap
-                            </Button>
-                        </Form>
+                            <Form>
+                                <input
+                                    id="email"
+                                    type="email"
+                                    placeholder="E-Posta"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                />
+                                <input
+                                    id="password"
+                                    type="password"
+                                    placeholder="Parola"
+                                    value={values.password}
+                                    onChange={handleChange}
+                                />
+                                <Button type="submit" size="tiny">
+                                    Giriş Yap
+                                </Button>
+                            </Form>
+                            <Link to="/signup">
+                                <p
+                                    style={{
+                                        marginLeft: "51%",
+                                        textDecoration: "underline",
+                                        marginTop: "1.7rem",
+                                        fontSize: "1.1rem",
+                                    }}
+                                >
+                                    Hesabın yoksa kayıt ol!
+                                </p>
+                            </Link>
+                        </Container>
                     )}
                 </Formik>
             </Container>

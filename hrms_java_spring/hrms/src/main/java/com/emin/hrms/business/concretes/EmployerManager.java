@@ -1,11 +1,11 @@
 package com.emin.hrms.business.concretes;
 
 import com.emin.hrms.business.abstracts.EmployerService;
-import com.emin.hrms.core.helpers.CloudinaryService;
+import com.emin.hrms.core.services.CloudinaryService;
+import com.emin.hrms.core.services.EmailSenderService;
 import com.emin.hrms.core.utilities.EmailValidator;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.EmployerDao;
-import com.emin.hrms.entities.concretes.CurriculaVitae;
 import com.emin.hrms.entities.concretes.Employer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,11 +19,13 @@ public class EmployerManager implements EmployerService {
 
     private final EmployerDao employerDao;
     private CloudinaryService cloudinaryService;
+    private final EmailSenderService emailSenderService;
 
     @Autowired
-    public EmployerManager(EmployerDao employerDao, CloudinaryService cloudinaryService) {
+    public EmployerManager(EmployerDao employerDao, CloudinaryService cloudinaryService, EmailSenderService emailSenderService) {
         this.employerDao = employerDao;
         this.cloudinaryService = cloudinaryService;
+        this.emailSenderService = emailSenderService;
     }
 
     @Override
@@ -44,7 +46,7 @@ public class EmployerManager implements EmployerService {
                 return new ErrorResult("Şirket gerçekliği doğrulanamadı!");
             } else {
                 this.employerDao.save(employer);
-                return new SuccessResult("İş arayan olarak kayıt olundu! Eposta adresinizden üyeliğinizi onaylayınız.");
+                return new SuccessResult("İş arayan olarak kayıt olundu! " + emailSenderService.emailSender(employer));
             }
         } catch (Exception e) {
             if (e.getMessage()

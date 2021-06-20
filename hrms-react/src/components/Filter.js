@@ -1,13 +1,12 @@
 import React from "react";
 import { Icon, Input, Menu } from "semantic-ui-react";
-import JobAdvertService from "../services/jobAdvertService";
 
 export const Filter = () => {
     return (
         <div className="find-job-filter">
             <Menu vertical>
                 <Menu.Item>
-                    <Input placeholder="Search..." />
+                    <Input placeholder="Search" />
                 </Menu.Item>
                 <Menu.Item>
                     Will Filter
@@ -82,3 +81,5 @@ export const Filter = () => {
         </div>
     );
 };
+
+export default Filter();

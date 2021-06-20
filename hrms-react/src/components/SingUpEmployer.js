@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, Container } from "semantic-ui-react";
-import { Formik, Form, Field } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import EmployerService from "../services/employerService";
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
@@ -104,11 +104,14 @@ export default function SingUpEmployer() {
                 >
                     {({ values, errors, touched, handleChange }) => (
                         <Form
-                            className="sign-up-in-form"
+                            className="sign-up-form"
                             style={{
                                 width: "30rem",
                             }}
                         >
+                            {errors.companyName && touched.companyName ? (
+                                <div>{errors.companyName}</div>
+                            ) : null}
                             <input
                                 id="companyName"
                                 type="text"
@@ -116,8 +119,8 @@ export default function SingUpEmployer() {
                                 value={values.companyName}
                                 onChange={handleChange}
                             />
-                            {errors.companyName && touched.companyName ? (
-                                <div>{errors.companyName}</div>
+                            {errors.email && touched.email ? (
+                                <div>{errors.email}</div>
                             ) : null}
                             <input
                                 id="email"
@@ -126,8 +129,8 @@ export default function SingUpEmployer() {
                                 value={values.email}
                                 onChange={handleChange}
                             />
-                            {errors.email && touched.email ? (
-                                <div>{errors.email}</div>
+                            {errors.website && touched.website ? (
+                                <div>{errors.website}</div>
                             ) : null}
                             <input
                                 id="website"
@@ -136,8 +139,8 @@ export default function SingUpEmployer() {
                                 value={values.website}
                                 onChange={handleChange}
                             />
-                            {errors.website && touched.website ? (
-                                <div>{errors.website}</div>
+                            {errors.phoneNumber && touched.phoneNumber ? (
+                                <div>{errors.phoneNumber}</div>
                             ) : null}
                             <input
                                 id="phoneNumber"
@@ -146,8 +149,8 @@ export default function SingUpEmployer() {
                                 value={values.phoneNumber}
                                 onChange={handleChange}
                             />
-                            {errors.phoneNumber && touched.phoneNumber ? (
-                                <div>{errors.firstName}</div>
+                            {errors.password && touched.password ? (
+                                <div>{errors.password}</div>
                             ) : null}
                             <input
                                 id="password"
@@ -156,8 +159,9 @@ export default function SingUpEmployer() {
                                 value={values.password}
                                 onChange={handleChange}
                             />
-                            {errors.password && touched.password ? (
-                                <div>{errors.password}</div>
+                            {errors.confirmPassword &&
+                            touched.confirmPassword ? (
+                                <div>{errors.confirmPassword}</div>
                             ) : null}
                             <input
                                 id="confirmPassword"
@@ -166,10 +170,6 @@ export default function SingUpEmployer() {
                                 value={values.confirmPassword}
                                 onChange={handleChange}
                             />
-                            {errors.confirmPassword &&
-                            touched.confirmPassword ? (
-                                <div>{errors.confirmPassword}</div>
-                            ) : null}
                             <label className="checkbox-div">
                                 <input
                                     id="termsAccepted"
@@ -179,10 +179,6 @@ export default function SingUpEmployer() {
                                         (values.termsAccepted = true)
                                     }
                                 />
-                                {errors.termsAccepted &&
-                                touched.termsAccepted ? (
-                                    <div>{errors.termsAccepted}</div>
-                                ) : null}
                                 Kullunıcı sözleşmesini okudum kabul ediyorum.
                             </label>
                             <Button floated="right" type="submit">

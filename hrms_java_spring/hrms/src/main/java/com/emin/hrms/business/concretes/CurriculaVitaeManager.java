@@ -1,8 +1,7 @@
 package com.emin.hrms.business.concretes;
 
 import com.emin.hrms.business.abstracts.CurriculaVitaeService;
-import com.emin.hrms.core.helpers.CloudinaryService;
-import com.emin.hrms.core.services.CloudinaryImageService;
+import com.emin.hrms.core.services.CloudinaryService;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.CurriculaVitaeDao;
 import com.emin.hrms.entities.concretes.CurriculaVitae;
