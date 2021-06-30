@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class DepartmentService {
     addDepartment(department) {
-        axios({
+        return axios({
             method: "POST",
             url: "http://localhost:8080/api/departments/adddepartment",
             data: department,

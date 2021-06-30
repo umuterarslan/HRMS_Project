@@ -28,8 +28,8 @@ public class SocialMedia {
     @Column(name = "linkedin_username")
     private String linkedinUsername;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "socialMedia", cascade = CascadeType.ALL)
-    private List<CurriculaVitae> curriculaVitaes;
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "curricula_vitae_id")
+    private CurriculaVitae curriculaVitae;
 
 }

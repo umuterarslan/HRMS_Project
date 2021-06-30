@@ -25,7 +25,7 @@ public class JobPosition {
     @Column(name = "job_title")
     private String jobTitle;
 
-    @OneToMany(mappedBy = "jobPosition")
+    @OneToMany(mappedBy = "jobPosition", cascade = CascadeType.DETACH)
     @JsonIgnore
     private List<JobAdvert> jobAdverts;
 

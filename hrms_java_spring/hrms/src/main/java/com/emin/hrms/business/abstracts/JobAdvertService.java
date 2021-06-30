@@ -20,7 +20,9 @@ public interface JobAdvertService {
 
     DataResult<List<JobAdvert>> getActiveJobAdvertsForEmployer(String companyName);
 
-    DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(boolean isDesc);
+    DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableAsc( int pageNo, int pageSize);
+
+    DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableDesc(int pageNo, int pageSize);
 
     Result changeActiveJobAdvert(int jobAdvertId, boolean state);
 

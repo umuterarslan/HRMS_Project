@@ -32,7 +32,7 @@ public class Employer extends User {
     @Column(name = "phone_number")
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "employer")
+    @OneToMany(mappedBy = "employer", cascade = CascadeType.DETACH)
     @JsonIgnore
     private List<JobAdvert> jobAdverts;
 

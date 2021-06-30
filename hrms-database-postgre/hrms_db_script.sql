@@ -29,7 +29,7 @@ CREATE TABLE public.jobseekers
 CREATE TABLE public.employers
 (
     user_id      INTEGER                NOT NULL,
-    picture_url  CHARACTER VARYING(200),
+    picture_url  CHARACTER VARYING(500),
     company_name CHARACTER VARYING(255) NOT NULL,
     website      CHARACTER VARYING(255) NOT NULL,
     phone_number CHARACTER VARYING(12)  NOT NULL,
@@ -105,14 +105,12 @@ CREATE TABLE public.job_adverts
 
 CREATE TABLE public.curricula_vitaes
 (
-    id              INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    jobseeker_id    INTEGER NOT NULL,
-    social_media_id INTEGER NOT NULL,
-    cover_letter    CHARACTER VARYING(200),
-    picture_url     CHARACTER VARYING(200),
+    id           INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    jobseeker_id INTEGER NOT NULL,
+    cover_letter CHARACTER VARYING(200),
+    picture_url  CHARACTER VARYING(500),
     CONSTRAINT pk_curricula_vitaes PRIMARY KEY (id),
-    CONSTRAINT uc_curricula_vitaes_jobseeker_id UNIQUE (jobseeker_id),
-    CONSTRAINT uc_curricula_vitaes_social_media_id UNIQUE (social_media_id)
+    CONSTRAINT uc_curricula_vitaes_jobseeker_id UNIQUE (jobseeker_id)
 );
 
 CREATE TABLE public.educations
@@ -170,12 +168,15 @@ CREATE TABLE public.jobseeker_languages
 
 CREATE TABLE public.social_medias
 (
-    id                INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    github_username   CHARACTER VARYING(100),
-    linkedin_username CHARACTER VARYING(100),
+    id                 INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    curricula_vitae_id INTEGER NOT NULL,
+    github_username    CHARACTER VARYING(100),
+    linkedin_username  CHARACTER VARYING(100),
     CONSTRAINT pk_social_medias PRIMARY KEY (id),
     CONSTRAINT uc_social_medias_github_username UNIQUE (github_username),
-    CONSTRAINT uc_social_medias_linkedin_username UNIQUE (linkedin_username)
+    CONSTRAINT uc_social_medias_linkedin_username UNIQUE (linkedin_username),
+    CONSTRAINT uc_social_media_curricula_vitae_id UNIQUE (curricula_vitae_id)
+
 );
 
 CREATE TABLE public.technologies
@@ -186,8 +187,15 @@ CREATE TABLE public.technologies
     CONSTRAINT pk_technologies PRIMARY KEY (id)
 );
 
+CREATE TABLE public.favorite_job_adverts_for_jobseekers
+(
+    id            INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    jobseeker_id  INTEGER NOT NULL,
+    job_advert_id INTEGER NOT NULL,
+    CONSTRAINT pk_favorite_job_adverts_for_jobseekers PRIMARY KEY (id)
+);
+
 ALTER TABLE public.curricula_vitaes
-    ADD FOREIGN KEY (social_media_id) REFERENCES public.social_medias (id),
     ADD FOREIGN KEY (jobseeker_id) REFERENCES public.jobseekers (user_id);
 
 ALTER TABLE public.educations
@@ -195,16 +203,19 @@ ALTER TABLE public.educations
     ADD FOREIGN KEY (school_id) REFERENCES public.schools (id),
     ADD FOREIGN KEY (department_id) REFERENCES public.departments (id);
 
-ALTER TABLE public.business_lifes
-    ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
-
 ALTER TABLE public.jobseeker_languages
-    ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id),
-    ADD FOREIGN KEY (language_id) REFERENCES public.languages (id);
+    ADD FOREIGN KEY (language_id) REFERENCES public.languages (id),
+    ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
 
 ALTER TABLE public.technologies
     ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
 
+ALTER TABLE public.social_medias
+    ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
+
+ALTER TABLE public.favorite_job_adverts_for_jobseekers
+    ADD FOREIGN KEY (jobseeker_id) REFERENCES public.jobseekers(user_id),
+    ADD FOREIGN KEY (job_advert_id) REFERENCES public.job_adverts(id);
 
 INSERT INTO cities (city_name)
 VALUES ('ADANA'),

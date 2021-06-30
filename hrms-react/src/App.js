@@ -2,13 +2,14 @@ import "./App.css";
 import React from "react";
 import "semantic-ui-css/semantic.min.css";
 import Navi from "./components/Navi";
-import { FindJob } from "./components/FindJob";
 import JobAdvertDetail from "./components/JobAdvertDetail";
 import { Container } from "semantic-ui-react";
 // import { Footer } from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
+import JobAdvertList from "./components/JobAdvertList";
+import CreateCv from "./components/CreateCv";
 
 function App() {
     return (
@@ -25,8 +26,12 @@ function App() {
                 >
                     <Navi />
                     <Switch>
-                        <Route exact path="/" component={FindJob} />
-                        <Route exact path="/findJob" component={FindJob} />
+                        <Route exact path="/" component={JobAdvertList} />
+                        <Route
+                            exact
+                            path="/findJob"
+                            component={JobAdvertList}
+                        />
                         <Route
                             exact
                             path="/jobAdvertDetail/:id"
@@ -34,6 +39,7 @@ function App() {
                         />
                         <Route exact path="/signup" component={SignUp} />
                         <Route path="/signin" exact component={SignIn} />
+                        <Route path="/createcv" exact component={CreateCv} />
                     </Switch>
                 </Container>
             </Router>

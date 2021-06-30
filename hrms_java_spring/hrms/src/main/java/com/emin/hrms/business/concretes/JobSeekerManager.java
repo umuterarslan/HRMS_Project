@@ -56,9 +56,9 @@ public class JobSeekerManager implements JobSeekerService {
     @Override
     public DataResult<JobSeeker> getJobSeekerById(int id) {
         if (this.jobSeekerDao.getJobSeekerById(id) != null) {
-            return new SuccessDataResult<>(this.jobSeekerDao.getJobSeekerById(id),"iş veren bilgileri getirildi");
+            return new SuccessDataResult<>(this.jobSeekerDao.getJobSeekerById(id),"iş arayan bilgileri getirildi");
         } else {
-            return new ErrorDataResult<>(null, "İş veren bilgileri getirme başarısız!");
+            return new ErrorDataResult<>(null, "İş arayan bilgileri getirme başarısız!");
         }
     }
 

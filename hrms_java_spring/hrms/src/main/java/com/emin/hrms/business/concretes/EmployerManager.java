@@ -59,6 +59,26 @@ public class EmployerManager implements EmployerService {
     }
 
     @Override
+    public Result updateEmployer(Employer employer) {
+        String[] employerWebsite = employer.getWebsite().split("\\.", 2);
+        String website = employerWebsite[1];
+        String[] employerEmail = employer.getEmail().split("@");
+        String employerDomain = employerEmail[1];
+        try {
+            if (!EmailValidator.emailFormatController(employer.getEmail())) {
+                return new ErrorResult("Mail formata uygun değil!");
+            } else if (!employerDomain.equals(website)) {
+                return new ErrorResult("Şirket gerçekliği doğrulanamadı!");
+            } else {
+                this.employerDao.save(employer);
+                return new SuccessResult("İş arayan bilgileri güncellemesi başarılı. " + emailSenderService.emailSender(employer));
+            }
+        } catch (Exception e) {
+            return new ErrorResult(e.toString());
+        }
+    }
+
+    @Override
     public DataResult<Employer> getEmployerById(int id) {
         if (this.employerDao.getEmployerById(id) != null) {
             return new SuccessDataResult<>(this.employerDao.getEmployerById(id),"iş veren bilgileri getirildi");
@@ -82,6 +102,5 @@ public class EmployerManager implements EmployerService {
         this.employerDao.save(employer);
         return new SuccessResult("Başarılı.");
     }
-
 
 }

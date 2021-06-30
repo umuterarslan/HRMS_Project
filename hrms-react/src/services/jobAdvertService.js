@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class JobAdvertService {
     getJobAdverts() {
-        return axios.get("http://localhost:8080/api/jobadverts/getJobAdverts");
+        return axios.get(`http://localhost:8080/api/jobadverts/getJobAdverts`);
     }
 
     getActiveJobAdverts() {
@@ -18,7 +18,7 @@ export default class JobAdvertService {
     }
 
     addJobAdvert(jobAdvert) {
-        axios({
+        return axios({
             method: "POST",
             url: `http://localhost:8080/api/jobadverts/addJobAdvert`,
             data: jobAdvert,
@@ -39,26 +39,38 @@ export default class JobAdvertService {
     }
 
     deleteJobAdvertById(id) {
-        axios.delete(
+        return axios.delete(
             `http://localhost:8080/api/jobadverts/deletejobadvertbyid?id=${id}`
         );
     }
 
     changeChangeJobAdvert(id, state) {
-        axios.post(
+        return axios.post(
             `http://localhost:8080/api/jobadverts/changeActiveJobAdvert?${id}=1&state=${state}`
         );
     }
 
     changeIsConfirmedJobAdvert(id, state) {
-        axios.get(
+        return axios.get(
             `http://localhost:8080/api/jobadverts/changeconfirmedjobadvert?id=${id}&state=${state}`
         );
     }
 
-    getJobAdvertByIsActiveTrueAndIsConfirmedTrue(state) {
-        axios.get(
-            `http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrue?isDesc=${state}`
-        );
+    getJobAdvertByIsActiveTrueAndIsConfirmedTrueSorted(state) {
+        return axios
+            .get(
+                `http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtruesorted?isDesc=${state}`
+            )
+            .then((res) => {
+                return res;
+            })
+            .catch((err) => {
+                return err;
+            });
+    }
+
+    getJobAdvertByIsActiveTrueAndIsConfirmedTrue() {
+        return axios.get(`http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrue
+        `);
     }
 }

@@ -4,6 +4,7 @@ import com.emin.hrms.business.abstracts.BusinessLifeService;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.BusinessLife;
+import com.emin.hrms.entities.dtos.addDtos.BusinessLifeAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,13 +21,18 @@ public class BusinessLifeController {
     }
 
     @PostMapping("/addBusinessLife")
-    public Result addBusinessLife(@RequestBody BusinessLife businessLife) {
-        return this.businessLifeService.addBusinessLife(businessLife);
+    public Result addBusinessLife(@RequestBody BusinessLifeAddDto businessLifeAddDto) {
+        return this.businessLifeService.addBusinessLife(businessLifeAddDto);
     }
 
     @GetMapping("/getbusinesslifessorted")
     public DataResult getBusinessLifeSorted(@RequestParam int id) {
         return this.businessLifeService.getBusinessLifeEndDateByCurriculaVitaeId(id);
+    }
+
+    @PutMapping("/updatebusinesslife")
+    public Result updateBusinessLife(@RequestBody BusinessLife businessLife) {
+        return this.businessLifeService.updateBusinessLife(businessLife);
     }
 
 }

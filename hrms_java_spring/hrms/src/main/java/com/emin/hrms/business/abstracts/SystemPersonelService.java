@@ -17,4 +17,6 @@ public interface SystemPersonelService {
 
     Result deleteSystemPersonelById(int id);
 
+    Result updateSystemPersonel(SystemPersonel systemPersonel);
+
 }

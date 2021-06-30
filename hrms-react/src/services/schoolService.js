@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default class SchoolService {
     addSchool(school) {
-        axios({
+        return axios({
             method: "POST",
             url: "http://localhost:8080/api/schools/addschool",
             data: school,

@@ -1,5 +1,6 @@
 package com.emin.hrms.entities.concretes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name = "job_adverts")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "products"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "favoriteJobAdvertsForJobseekers"})
 public class JobAdvert {
 
     @Id
@@ -52,7 +54,7 @@ public class JobAdvert {
     private City city;
 
     @Column(name = "is_active")
-    private boolean isActive = true;
+    private boolean isActive = false;
 
     @Column(name = "is_confirmed")
     private boolean isConfirmed = false;
@@ -62,5 +64,9 @@ public class JobAdvert {
 
     @Column(name = "remote_or_standart_typed")
     private String remoteOrStandartTyped;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "jobAdvert", cascade = CascadeType.DETACH)
+    private List<FavoriteJobAdvertsForJobseekers> favoriteJobAdvertsForJobseekers;
 
 }

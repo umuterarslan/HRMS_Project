@@ -20,7 +20,7 @@ export default function JobAdvertDetail() {
         jobAdvertService
             .getJobAdvertById(id)
             .then((success) => setJobAdvert(success.data.data));
-    });
+    }, []);
 
     return (
         <div

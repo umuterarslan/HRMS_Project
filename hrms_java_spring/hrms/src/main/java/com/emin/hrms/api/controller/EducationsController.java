@@ -4,7 +4,7 @@ import com.emin.hrms.business.abstracts.EducationService;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.Education;
-import com.emin.hrms.entities.concretes.School;
+import com.emin.hrms.entities.dtos.addDtos.EducationAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +23,8 @@ public class EducationsController {
     }
 
     @PostMapping("/addeducation")
-    public Result eddEducation(@RequestBody Education education) {
-        return this.educationService.addEducation(education);
+    public Result eddEducation(@RequestBody EducationAddDto educationAddDto) {
+        return this.educationService.addEducation(educationAddDto);
     }
 
     @GetMapping("/geteudcations")

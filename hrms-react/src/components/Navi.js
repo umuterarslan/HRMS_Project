@@ -13,7 +13,6 @@ export default function Navi() {
                     backgroundColor: "#0652dd",
                     transition: "all 0.5s linear 0.5",
                     borderBottom: "solid 2px grey",
-                    borderTop: "solid 2px grey",
                 }}
             >
                 <Container>

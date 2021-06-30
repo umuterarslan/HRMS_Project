@@ -27,7 +27,7 @@ public class JobAdvertsController {
     }
 
     @PostMapping("/addJobAdvert")
-    public Result addEmployer(@RequestBody JobAdvert jobAdvert) {
+    public Result addJobAdvert(@RequestBody JobAdvert jobAdvert) {
         return this.jobAdvertService.addJobAdvert(jobAdvert);
     }
 
@@ -66,9 +66,15 @@ public class JobAdvertsController {
         return this.jobAdvertService.deleteJobAdvertById(id);
     }
 
-    @GetMapping("/getjobadvertbyisactivetrueandisconfirmedtrue")
-    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(boolean isDesc) {
-        return this.jobAdvertService.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(isDesc);
+    @GetMapping("/getjobadvertbyisactivetrueandisconfirmedtrueandpageabledesc")
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableDesc(@RequestParam int pageNo,int pageSize) {
+        return this.jobAdvertService.getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableDesc(pageNo-1,pageSize);
+    }
+
+
+    @GetMapping("/getjobadvertbyisactivetrueandisconfirmedtrueandpageableasc")
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableAsc(@RequestParam int pageNo,int pageSize) {
+        return this.jobAdvertService.getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableAsc(pageNo-1,pageSize);
     }
 
 }

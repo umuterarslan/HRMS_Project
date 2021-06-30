@@ -2,14 +2,15 @@ package com.emin.hrms.business.abstracts;
 
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
-import com.emin.hrms.entities.concretes.Technologie;
+import com.emin.hrms.entities.concretes.Technology;
+import com.emin.hrms.entities.dtos.addDtos.TechnologyAddDto;
 
 import java.util.List;
 
 public interface TechnologieService {
 
-    DataResult<List<Technologie>> getTechnologies();
+    DataResult<List<Technology>> getTechnologies();
 
-    Result addTechnologie(Technologie programmingLanguage);
+    Result addTechnologie(TechnologyAddDto programmingLanguage);
 
 }

@@ -31,19 +31,20 @@ public class Education {
     private LocalDate startDate;
 
     @Column(name = "end_date")
+    @NotNull
+    @NotBlank
     private LocalDate endDate;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "school_id")
     private School school;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "curricula_vitae_id")
-    private CurriculaVitae curriculaVitae;
-
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "department_id")
     private Department department;
 
+    @ManyToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "curricula_vitae_id")
+    private CurriculaVitae curriculaVitae;
 
 }

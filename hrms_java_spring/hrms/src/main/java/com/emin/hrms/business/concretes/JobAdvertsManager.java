@@ -5,9 +5,9 @@ import com.emin.hrms.core.utilities.IsFull;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.JobAdvertDao;
 import com.emin.hrms.entities.concretes.JobAdvert;
-import com.emin.hrms.entities.concretes.SystemPersonel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -68,14 +68,37 @@ public class JobAdvertsManager implements JobAdvertService {
     }
 
     @Override
-    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(boolean isDesc) {
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableDesc(int pageNo,int pageSize) {
         Sort sort;
-        if (isDesc){
-            sort = Sort.by(Sort.Direction.DESC, "releaseDate");
-        } else {
-            sort = Sort.by(Sort.Direction.ASC, "releaseDate");
+        sort = Sort.by(Sort.Direction.DESC, "releaseDate");
+
+        Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
+        if (this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable).size() > 0) {
+            return new SuccessDataResult<>(
+                    this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable),
+                    "İş ilanları en yeni olarak sıralandı.");
         }
-        return new SuccessDataResult<>(this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(sort));
+
+        return new ErrorDataResult<>(
+                this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable),
+                "Sıralanacak iş ilanı bulunamadı.");
+    }
+
+    @Override
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableAsc(int pageNo, int pageSize) {
+        Sort sort;
+        sort = Sort.by(Sort.Direction.ASC, "releaseDate");
+
+        Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
+        if (this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable).size() > 0) {
+            return new SuccessDataResult<>(
+                    this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable),
+                    "İş ilanları en eski olarak sıralandı.");
+        }
+
+        return new ErrorDataResult<>(
+                this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable),
+                "Sıralanacak iş ilanı bulunamadı.");
     }
 
     @Override

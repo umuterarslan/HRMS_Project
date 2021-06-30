@@ -2,7 +2,7 @@ package com.emin.hrms.api.controller;
 
 import com.emin.hrms.business.abstracts.JobSeekerLanguageService;
 import com.emin.hrms.core.utilities.results.Result;
-import com.emin.hrms.entities.concretes.JobSeekerLanguage;
+import com.emin.hrms.entities.dtos.addDtos.JobSeekerLanguageAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +19,8 @@ public class JobSeekerLanguagesController {
     }
 
     @PostMapping("/addjobseekerlanguage")
-    public Result addJobSeekerLanguage(@RequestBody JobSeekerLanguage jobseekerLanguage) {
-        return this.jobSeekerLanguageService.addJobSeekerLanguage(jobseekerLanguage);
+    public Result addJobSeekerLanguage(@RequestBody JobSeekerLanguageAddDto jobSeekerLanguageAddDto) {
+        return this.jobSeekerLanguageService.addJobSeekerLanguage(jobSeekerLanguageAddDto);
     }
 
 }

@@ -3,8 +3,8 @@ package com.emin.hrms.api.controller;
 import com.emin.hrms.business.abstracts.CurriculaVitaeService;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
-import com.emin.hrms.core.utilities.results.SuccessResult;
 import com.emin.hrms.entities.concretes.CurriculaVitae;
+import com.emin.hrms.entities.dtos.addDtos.CurriculaVitaeAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,8 +24,8 @@ public class CurriculaVitaeController {
     }
 
     @PostMapping("/addcv")
-    public Result addCv(@RequestBody CurriculaVitae curriculaVitae) {
-        return this.curriculaVitaeService.addCv(curriculaVitae);
+    public Result addCv(@RequestBody CurriculaVitaeAddDto curriculaVitaeAddDto) {
+        return this.curriculaVitaeService.addCv(curriculaVitaeAddDto);
     }
 
     @GetMapping("/listcvbyjobseekerid")
@@ -36,6 +36,11 @@ public class CurriculaVitaeController {
     @PostMapping("/addcvpicture")
     public Result addPicture(int jobSeekerId,MultipartFile file) throws IOException {
         return this.curriculaVitaeService.uploadPicture(jobSeekerId,file);
+    }
+
+    @PutMapping("/updatecv")
+    public Result updateCv(@RequestBody CurriculaVitae curriculaVitae) {
+        return this.curriculaVitaeService.updateCv(curriculaVitae);
     }
 
 }

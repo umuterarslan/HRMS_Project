@@ -43,4 +43,9 @@ public class SystemPersonelController {
         return this.systemPersonelService.deleteSystemPersonelById(id);
     }
 
+    @PutMapping("/updatesystempersonel")
+    public Result updateSystemPersonel(@RequestBody SystemPersonel systemPersonel) {
+        return this.systemPersonelService.updateSystemPersonel(systemPersonel);
+    }
+
 }

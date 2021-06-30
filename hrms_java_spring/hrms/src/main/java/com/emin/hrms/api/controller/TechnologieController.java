@@ -3,7 +3,8 @@ package com.emin.hrms.api.controller;
 import com.emin.hrms.business.abstracts.TechnologieService;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
-import com.emin.hrms.entities.concretes.Technologie;
+import com.emin.hrms.entities.concretes.Technology;
+import com.emin.hrms.entities.dtos.addDtos.TechnologyAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +23,12 @@ public class TechnologieController {
     }
 
     @PostMapping("/addtechnologie")
-    public Result addSchool(@RequestBody Technologie technologies) {
+    public Result addSchool(@RequestBody TechnologyAddDto technologies) {
         return this.technologieService.addTechnologie(technologies);
     }
 
     @GetMapping("/gettechnologies")
-    public DataResult<List<Technologie>> getTechnologies() {
+    public DataResult<List<Technology>> getTechnologies() {
         return this.technologieService.getTechnologies();
     }
 

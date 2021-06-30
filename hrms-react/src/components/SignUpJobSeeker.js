@@ -1,7 +1,5 @@
 import React from "react";
 import { Button, Container } from "semantic-ui-react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import JobSeekerService from "../services/jobSeekerService";
@@ -127,16 +125,18 @@ export default function SignUpJobSeeker() {
                                 width: "30rem",
                             }}
                         >
-                            {errors.firstName && touched.firstName ? (
-                                <div>{errors.firstName}</div>
-                            ) : null}
-                            <input
-                                id="firstName"
-                                type="text"
-                                placeholder="Ad"
-                                value={values.firstName}
-                                onChange={handleChange}
-                            />
+                            <div className="field">
+                                {errors.firstName && touched.firstName ? (
+                                    <div>{errors.firstName}</div>
+                                ) : null}
+                                <input
+                                    id="firstName"
+                                    type="text"
+                                    placeholder="Ad"
+                                    value={values.firstName}
+                                    onChange={handleChange}
+                                />
+                            </div>
                             {errors.lastName && touched.lastName ? (
                                 <div>{errors.lastName}</div>
                             ) : null}

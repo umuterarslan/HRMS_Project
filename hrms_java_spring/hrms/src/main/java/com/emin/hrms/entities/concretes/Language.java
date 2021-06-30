@@ -26,7 +26,7 @@ public class Language {
     private String languageName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "language")
+    @OneToMany(mappedBy = "language", cascade = CascadeType.DETACH)
     private List<JobSeekerLanguage> languages;
 
 }

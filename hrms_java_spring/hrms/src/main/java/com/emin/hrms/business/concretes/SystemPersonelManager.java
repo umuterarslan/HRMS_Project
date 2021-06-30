@@ -45,4 +45,10 @@ public class SystemPersonelManager implements SystemPersonelService {
         return new SuccessResult("Silme başarılı.");
     }
 
+    @Override
+    public Result updateSystemPersonel(SystemPersonel systemPersonel) {
+        this.systemPersonelDao.save(systemPersonel);
+        return new SuccessResult("Sistem personel bilgileri güncelleme başarılı.");
+    }
+
 }

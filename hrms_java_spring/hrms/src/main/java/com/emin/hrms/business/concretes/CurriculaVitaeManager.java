@@ -1,10 +1,13 @@
 package com.emin.hrms.business.concretes;
 
 import com.emin.hrms.business.abstracts.CurriculaVitaeService;
+import com.emin.hrms.core.dtoConverter.DtoConverterService;
 import com.emin.hrms.core.services.CloudinaryService;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.CurriculaVitaeDao;
 import com.emin.hrms.entities.concretes.CurriculaVitae;
+import com.emin.hrms.entities.dtos.addDtos.CurriculaVitaeAddDto;
+import com.emin.hrms.entities.dtos.updateDtos.CurriculaVitaeUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -16,16 +19,19 @@ public class CurriculaVitaeManager implements CurriculaVitaeService {
 
     private CurriculaVitaeDao curriculaVitaeDao;
     private CloudinaryService cloudinaryService;
+    private DtoConverterService dtoConverterService;
 
     @Autowired
-    public CurriculaVitaeManager(CurriculaVitaeDao curriculaVitaeDao, CloudinaryService cloudinaryService) {
+    public CurriculaVitaeManager(CurriculaVitaeDao curriculaVitaeDao, CloudinaryService cloudinaryService,DtoConverterService dtoConverterService) {
         this.curriculaVitaeDao = curriculaVitaeDao;
         this.cloudinaryService = cloudinaryService;
+        this.dtoConverterService = dtoConverterService;
     }
 
     @Override
-    public Result addCv(CurriculaVitae curriculaVitae) {
-        this.curriculaVitaeDao.save(curriculaVitae);
+    public Result addCv(CurriculaVitaeAddDto curriculaVitaeAddDto) {
+        this.curriculaVitaeDao.save((CurriculaVitae)
+        this.dtoConverterService.dtoClassConverter(curriculaVitaeAddDto, CurriculaVitae.class));
         return new SuccessResult("Cv eklendi");
     }
 
@@ -48,5 +54,10 @@ public class CurriculaVitaeManager implements CurriculaVitaeService {
         return new SuccessResult("Başarılı.");
     }
 
+    @Override
+    public Result updateCv(CurriculaVitae curriculaVitae) {
+        this.curriculaVitaeDao.save(curriculaVitae);
+        return new SuccessResult("Cv güncelleme başarılı.");
+    }
 
 }

@@ -17,7 +17,7 @@ export default class JobSeekerSerive {
     }
 
     deleteJobSeekerById(id) {
-        axios.delete(
+        return axios.delete(
             `http://localhost:8080/api/jobseekers/deletejobseekerbyid?id=${id}`
         );
     }

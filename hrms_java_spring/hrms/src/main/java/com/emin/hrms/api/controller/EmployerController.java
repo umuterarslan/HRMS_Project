@@ -47,4 +47,9 @@ public class EmployerController {
     public Result addEmployerPicture(int employerId, MultipartFile file) throws IOException {
         return this.employerService.uploadPicture(employerId ,file);
     }
+
+    @PutMapping("/updateemployer")
+    public Result updateEmployer(@RequestBody Employer employer) {
+        return this.employerService.updateEmployer(employer);
+    }
 }

@@ -3,6 +3,7 @@ package com.emin.hrms.dataAccess.abstracts;
 import com.cloudinary.utils.ObjectUtils;
 import com.emin.hrms.entities.concretes.JobAdvert;
 import com.emin.hrms.entities.concretes.SystemPersonel;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -20,7 +21,7 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 
     List<JobAdvert> getJobAdvertByIsActiveTrueAndEmployer_CompanyName(String companyName);
 
-    List<JobAdvert> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(Sort sort);
+    List<JobAdvert> getJobAdvertByIsActiveTrueAndIsConfirmedTrue(Pageable pageable);
 
     List<JobAdvert> getAllByIsActiveTrue(Sort sort);
 

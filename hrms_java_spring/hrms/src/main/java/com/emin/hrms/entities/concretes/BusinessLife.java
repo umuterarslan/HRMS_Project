@@ -1,6 +1,5 @@
 package com.emin.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -40,8 +39,7 @@ public class BusinessLife {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "curricula_vitae_id")
     private CurriculaVitae curriculaVitae;
-
 }

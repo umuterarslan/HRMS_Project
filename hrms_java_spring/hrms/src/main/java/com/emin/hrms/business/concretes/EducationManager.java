@@ -1,10 +1,12 @@
 package com.emin.hrms.business.concretes;
 
 import com.emin.hrms.business.abstracts.EducationService;
+import com.emin.hrms.core.dtoConverter.DtoConverterService;
 import com.emin.hrms.core.utilities.IsFull;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.EducationDao;
 import com.emin.hrms.entities.concretes.Education;
+import com.emin.hrms.entities.dtos.addDtos.EducationAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -15,10 +17,12 @@ import java.util.List;
 public class EducationManager implements EducationService {
 
     private EducationDao educationDao;
+    private DtoConverterService dtoConverterService;
 
     @Autowired
-    public EducationManager(EducationDao educationDao) {
+    public EducationManager(EducationDao educationDao,  DtoConverterService dtoConverterService) {
         this.educationDao = educationDao;
+        this.dtoConverterService = dtoConverterService;
     }
 
     @Override
@@ -31,8 +35,8 @@ public class EducationManager implements EducationService {
     }
 
     @Override
-    public Result addEducation(Education education) {
-        this.educationDao.save(education);
+    public Result addEducation(EducationAddDto educationAddDto) {
+        this.educationDao.save((Education) this.dtoConverterService.dtoClassConverter(educationAddDto, Education.class));
         return new SuccessResult("Eğitim bilgileri ekleme başarılı.");
     }
 

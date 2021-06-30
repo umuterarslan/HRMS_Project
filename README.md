@@ -1,13 +1,4 @@
 ## HRMS Project for kodlama.io Java React Camp
 
-#### Day 6 ✅
-
-#### Day 7 ✅
-
-#### Day 8 ✅
-
-#### Day 9 ✅
-
-#### Day 10 No Homework.
-
-#### Day 11 ✅
+###Pair Programming
+<b>This project developed with <a href="https://github.com/torukobyte" target="_blank">Burak Kalaycı</a> a.k.a<a href="https://github.com/torukobyte" target="_blank"> 8CA5F</a></b>
