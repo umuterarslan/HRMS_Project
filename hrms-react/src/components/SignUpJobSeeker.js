@@ -88,7 +88,6 @@ export default function SignUpJobSeeker() {
                             jobSeekerService
                                 .addJobSeeker(regulated)
                                 .then((res) => {
-                                    console.log(res.message);
                                     if (res.success === false) {
                                         toast.error(res.message, {
                                             draggable: true,
@@ -104,7 +103,7 @@ export default function SignUpJobSeeker() {
                                     }
                                 })
                                 .catch((err) => {
-                                    console.log(err);
+                                    toast.error("Bir hata oluştu!");
                                 });
                         }
                     }}

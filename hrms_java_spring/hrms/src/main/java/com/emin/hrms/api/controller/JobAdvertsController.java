@@ -4,6 +4,7 @@ import com.emin.hrms.business.abstracts.JobAdvertService;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.JobAdvert;
+import com.emin.hrms.entities.dtos.addDtos.JobAdvertAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +28,8 @@ public class JobAdvertsController {
     }
 
     @PostMapping("/addJobAdvert")
-    public Result addJobAdvert(@RequestBody JobAdvert jobAdvert) {
-        return this.jobAdvertService.addJobAdvert(jobAdvert);
+    public Result addJobAdvert(@RequestBody JobAdvertAddDto jobAdvertAddDto) {
+        return this.jobAdvertService.addJobAdvert(jobAdvertAddDto);
     }
 
     @GetMapping("/getActiveJobAdverts")

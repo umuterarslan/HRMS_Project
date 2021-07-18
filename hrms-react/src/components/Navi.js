@@ -21,10 +21,8 @@ export default function Navi() {
                             İş Bul <Icon disabled name="search" color="black" />{" "}
                         </p>
                     </Menu.Item>
-                    <Menu.Item as={Link} to="/findJob">
-                        <p>
-                            İş Bul <Icon disabled name="search" color="black" />
-                        </p>
+                    <Menu.Item as={Link} to="/jobadvertcreate">
+                        <p>İlan Oluştur</p>
                     </Menu.Item>
                     <Menu.Item position="right" as={Link} to="/signin">
                         <p>

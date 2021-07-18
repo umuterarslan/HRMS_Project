@@ -7,6 +7,8 @@ import com.emin.hrms.core.utilities.results.SuccessDataResult;
 import com.emin.hrms.core.utilities.results.SuccessResult;
 import com.emin.hrms.entities.concretes.JobSeeker;
 import com.emin.hrms.entities.concretes.SystemPersonel;
+import com.emin.hrms.entities.dtos.getDtos.SystemPersonelGetDto;
+import com.emin.hrms.entities.dtos.updateDtos.SystemPersonelUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/systempersonels")
+@CrossOrigin
 public class SystemPersonelController {
 
     private SystemPersonelService systemPersonelService;
@@ -44,8 +47,8 @@ public class SystemPersonelController {
     }
 
     @PutMapping("/updatesystempersonel")
-    public Result updateSystemPersonel(@RequestBody SystemPersonel systemPersonel) {
-        return this.systemPersonelService.updateSystemPersonel(systemPersonel);
+    public Result updateSystemPersonel(@RequestParam() int id, @RequestParam() String email, @RequestParam() String username) {
+        return this.systemPersonelService.updateSystemPersonel(id, email, username);
     }
 
 }

@@ -1,10 +1,12 @@
 package com.emin.hrms.business.concretes;
 
 import com.emin.hrms.business.abstracts.JobAdvertService;
+import com.emin.hrms.core.dtoConverter.DtoConverterService;
 import com.emin.hrms.core.utilities.IsFull;
 import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.JobAdvertDao;
 import com.emin.hrms.entities.concretes.JobAdvert;
+import com.emin.hrms.entities.dtos.addDtos.JobAdvertAddDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,10 +19,13 @@ import java.util.List;
 public class JobAdvertsManager implements JobAdvertService {
 
     private final JobAdvertDao jobAdvertsDao;
+    private DtoConverterService dtoConverterService;
+
 
     @Autowired
-    public JobAdvertsManager(JobAdvertDao jobAdvertsDao) {
+    public JobAdvertsManager(JobAdvertDao jobAdvertsDao, DtoConverterService dtoConverterService) {
         this.jobAdvertsDao = jobAdvertsDao;
+        this.dtoConverterService = dtoConverterService;
     }
 
     @Override
@@ -29,8 +34,8 @@ public class JobAdvertsManager implements JobAdvertService {
     }
 
     @Override
-    public Result addJobAdvert(JobAdvert jobAdvert) {
-        this.jobAdvertsDao.save(jobAdvert);
+    public Result addJobAdvert(JobAdvertAddDto jobAdvertAddDto) {
+        this.jobAdvertsDao.save((JobAdvert) this.dtoConverterService.dtoClassConverter(jobAdvertAddDto, JobAdvert.class));
         return new SuccessResult("İş ilanı eklendi");
     }
 

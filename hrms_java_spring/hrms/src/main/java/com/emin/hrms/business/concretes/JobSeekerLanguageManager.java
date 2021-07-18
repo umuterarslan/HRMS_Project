@@ -25,7 +25,13 @@ public class JobSeekerLanguageManager implements JobSeekerLanguageService {
     @Override
     public Result addJobSeekerLanguage(JobSeekerLanguageAddDto jobSeekerLanguageAddDto) {
         this.jobSeekerLanguageDao.save((JobSeekerLanguage) this.dtoConverterService.dtoClassConverter(jobSeekerLanguageAddDto, JobSeekerLanguage.class));
-        return new SuccessResult("Cv'ye dil ekleme başarılı.");
+        return new SuccessResult("Dil ekleme başarılı.");
+    }
+
+    @Override
+    public Result deleteJobSeekerLanguage(int id) {
+        this.jobSeekerLanguageDao.deleteJobSeekerLanguageById(id);
+        return new SuccessResult("Dil silme başarılı.");
     }
 
 }

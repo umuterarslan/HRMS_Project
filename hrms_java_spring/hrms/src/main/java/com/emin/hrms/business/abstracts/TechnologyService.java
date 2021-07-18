@@ -7,10 +7,12 @@ import com.emin.hrms.entities.dtos.addDtos.TechnologyAddDto;
 
 import java.util.List;
 
-public interface TechnologieService {
+public interface TechnologyService {
 
     DataResult<List<Technology>> getTechnologies();
 
     Result addTechnologie(TechnologyAddDto programmingLanguage);
+
+    Result deleteTechnology(int id);
 
 }

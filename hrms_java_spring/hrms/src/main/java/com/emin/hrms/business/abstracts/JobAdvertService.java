@@ -4,6 +4,7 @@ import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.JobAdvert;
 import com.emin.hrms.entities.concretes.SystemPersonel;
+import com.emin.hrms.entities.dtos.addDtos.JobAdvertAddDto;
 import org.springframework.boot.autoconfigure.batch.BatchProperties;
 
 import java.util.List;
@@ -12,7 +13,7 @@ public interface JobAdvertService {
 
     DataResult<List<JobAdvert>> getJobAdverts();
 
-    Result addJobAdvert(JobAdvert jobAdverts);
+    Result addJobAdvert(JobAdvertAddDto jobAdvertsAddDto);
 
     DataResult<List<JobAdvert>> getActiveJobAdverts();
 

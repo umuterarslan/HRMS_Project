@@ -11,19 +11,31 @@ export default class JobAdvertService {
         );
     }
 
-    getActiveJobAdvertsSorted(state) {
+    getActiveJobAdvertsSortedAsc(pageSize) {
         return axios.get(
-            `http://localhost:8080/api/jobadverts/getActiveJobAdvertsSorted?is%20desc=${state}`
+            `http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrueandpageableasc?pageNo=1&pageSize=${pageSize}`
         );
     }
 
-    addJobAdvert(jobAdvert) {
-        return axios({
+    getActiveJobAdvertsSortedDesc(pageSize) {
+        return axios.get(
+            `http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrueandpageabledesc?pageNo=1&pageSize=${pageSize}`
+        );
+    }
+
+    async addJobAdvert(jobAdvert) {
+        return await axios({
             method: "POST",
             url: `http://localhost:8080/api/jobadverts/addJobAdvert`,
             data: jobAdvert,
-            headers: "content-type: application/json",
-        });
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
+        })
+            .then((res) => {
+                return res.data.message;
+            })
+            .catch((err) => {
+                return err.error.error;
+            });
     }
 
     getJobAdvertById(id) {

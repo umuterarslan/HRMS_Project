@@ -7,7 +7,7 @@ import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.CurriculaVitaeDao;
 import com.emin.hrms.entities.concretes.CurriculaVitae;
 import com.emin.hrms.entities.dtos.addDtos.CurriculaVitaeAddDto;
-import com.emin.hrms.entities.dtos.updateDtos.CurriculaVitaeUpdateDto;
+import com.emin.hrms.entities.dtos.updateDtos.CurriculaVitaeCoverLetterUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -32,7 +32,7 @@ public class CurriculaVitaeManager implements CurriculaVitaeService {
     public Result addCv(CurriculaVitaeAddDto curriculaVitaeAddDto) {
         this.curriculaVitaeDao.save((CurriculaVitae)
         this.dtoConverterService.dtoClassConverter(curriculaVitaeAddDto, CurriculaVitae.class));
-        return new SuccessResult("Cv eklendi");
+        return new SuccessResult("Cv Oluşturuldu.");
     }
 
     @Override
@@ -51,13 +51,13 @@ public class CurriculaVitaeManager implements CurriculaVitaeService {
         CurriculaVitae cv = this.curriculaVitaeDao.getOne(cvId);
         cv.setPictureUrl(url.toString());
         this.curriculaVitaeDao.save(cv);
-        return new SuccessResult("Başarılı.");
+        return new SuccessResult("Fotoğraf ekleme başarılı.");
     }
 
     @Override
-    public Result updateCv(CurriculaVitae curriculaVitae) {
-        this.curriculaVitaeDao.save(curriculaVitae);
-        return new SuccessResult("Cv güncelleme başarılı.");
+    public Result updateCvCoverLetter(int id, String coverLetter) {
+        this.curriculaVitaeDao.updateCvCoverLetter(id, coverLetter);
+        return new SuccessResult("Cv açıklaması güncelleme başarılı.");
     }
 
 }

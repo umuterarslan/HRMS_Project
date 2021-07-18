@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -17,6 +18,7 @@ import javax.persistence.*;
 public class SystemPersonel extends User {
 
     @Column(name = "username")
+    @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     private String username;
 
 }

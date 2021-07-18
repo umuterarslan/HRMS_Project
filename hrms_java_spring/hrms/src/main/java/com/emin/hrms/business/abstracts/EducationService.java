@@ -15,4 +15,8 @@ public interface EducationService {
 
     DataResult<List<Education>> getAllSorted(int id);
 
+    Result deleteEducationById(int id);
+
+    DataResult<List<Education>> getEducationByCurriculaVitaeId(int id);
+
 }

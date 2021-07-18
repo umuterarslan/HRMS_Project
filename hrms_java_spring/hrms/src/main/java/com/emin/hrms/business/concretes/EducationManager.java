@@ -50,4 +50,15 @@ public class EducationManager implements EducationService {
         }
     }
 
+    @Override
+    public Result deleteEducationById(int id) {
+        this.educationDao.deleteEducationById(id);
+        return new SuccessResult("Eğitim bilgisi silme başarılı.");
+    }
+
+    @Override
+    public DataResult<List<Education>> getEducationByCurriculaVitaeId(int id) {
+        return new SuccessDataResult<>(this.educationDao.getEducationByCurriculaVitaeId(id));
+    }
+
 }

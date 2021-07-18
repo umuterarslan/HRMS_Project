@@ -80,16 +80,16 @@ export default function SingUpEmployer() {
                             };
                             employerService
                                 .addEmployer(regulated)
-                                .then((res) => {
-                                    console.log(res.message);
-                                    if (res.success === false) {
-                                        toast.error(res.message, {
+                                .then((success) => {
+                                    console.log(success.message);
+                                    if (success.success === false) {
+                                        toast.error(success.message, {
                                             draggable: true,
                                             position: toast.POSITION.TOP_RIGHT,
                                             transition: Bounce,
                                         });
                                     } else {
-                                        toast.success(res.message, {
+                                        toast.success(success.message, {
                                             draggable: true,
                                             position: toast.POSITION.TOP_RIGHT,
                                             transition: Zoom,

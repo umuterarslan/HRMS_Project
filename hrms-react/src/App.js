@@ -9,7 +9,12 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignUp from "./components/SignUp";
 import SignIn from "./components/SignIn";
 import JobAdvertList from "./components/JobAdvertList";
-import CreateCv from "./components/CreateCv";
+import CvCreate from "./components/CvCreate";
+import CvEdit from "./components/CvEdit";
+import CvDetail from "./components/CvDetail";
+import JobAdvertCreate from "./components/JobAdvertCreate";
+import SystemPersonelCreate from "./components/SystemPersonelCreate";
+import SystemPersonelUpdate from "./components/SystemPersonelUpdate";
 
 function App() {
     return (
@@ -19,6 +24,7 @@ function App() {
                 minHeight: "50rem",
             }}
         >
+            <h1>sa</h1>
             <Router>
                 <Container
                     className="content-container"
@@ -39,7 +45,24 @@ function App() {
                         />
                         <Route exact path="/signup" component={SignUp} />
                         <Route path="/signin" exact component={SignIn} />
-                        <Route path="/createcv" exact component={CreateCv} />
+                        <Route path="/cvcreate" exact component={CvCreate} />
+                        <Route path="/cvedit" exact component={CvEdit} />
+                        <Route path="/cvdetail" exact component={CvDetail} />
+                        <Route
+                            path="/jobadvertcreate"
+                            exact
+                            component={JobAdvertCreate}
+                        />
+                        <Route
+                            path="/systempersonelcreate"
+                            exact
+                            component={SystemPersonelCreate}
+                        />
+                        <Route
+                            path="/systempersonelupdate"
+                            exact
+                            component={SystemPersonelUpdate}
+                        />
                     </Switch>
                 </Container>
             </Router>

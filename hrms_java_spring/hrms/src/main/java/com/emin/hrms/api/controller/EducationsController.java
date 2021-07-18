@@ -37,4 +37,14 @@ public class EducationsController {
         return this.educationService.getAllSorted(id);
     }
 
+    @DeleteMapping("/deleteeeducationbyid")
+    public Result deleteEducationById(@RequestParam int id) {
+        return this.educationService.deleteEducationById(id);
+    }
+
+    @GetMapping("/geteducationbycurriculavitaeid")
+    public DataResult getEducationByCurriculaVitaeId(@RequestParam int id) {
+        return this.educationService.getEducationByCurriculaVitaeId(id);
+    }
+
 }

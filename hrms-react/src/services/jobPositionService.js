@@ -10,7 +10,9 @@ export default class JobPositionService {
         });
     }
 
-    getJobPositions() {
-        return axios.get("http://localhost:8080/api/jobpositions/getpositions");
+    async getJobPositions() {
+        return await axios.get(
+            `http://localhost:8080/api/jobpositions/getpositions`
+        );
     }
 }

@@ -5,8 +5,37 @@ export default class CurriculaVitaeService {
         return await axios({
             method: "POST",
             url: "http://localhost:8080/api/curriculavitae/addcv",
-            data: CurriculaVitaeService,
+            data: curriculaVitae,
             headers: { "Content-Type": "application/json;charset=UTF-8" },
+        })
+            .then((res) => {
+                return res.data.message;
+            })
+            .catch((err) => {
+                return err.error.error;
+            });
+    }
+
+    async updateCvCoverLetter(id, coverLetter) {
+        return await axios({
+            method: "PUT",
+            url: `http://localhost:8080/api/curriculavitae/updatecvcoverletter?coverLetter=${coverLetter}&id=${id}`,
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
+        })
+            .then((res) => {
+                return res.data.message;
+            })
+            .catch((err) => {
+                return err.error.error;
+            });
+    }
+
+    async addPictureToCv(formData, id) {
+        return await axios({
+            method: "POST",
+            url: `http://localhost:8080/api/curriculavitae/addcvpicture?cvId=${id}`,
+            data: formData,
+            headers: { "Content-Type": "multipart/form-data" },
         })
             .then((res) => {
                 return res.data.message;
@@ -14,15 +43,6 @@ export default class CurriculaVitaeService {
             .catch((err) => {
                 return err;
             });
-    }
-
-    addPictureToCv(picture, id) {
-        axios({
-            method: "POST",
-            url: `http://localhost:8080/api/curriculavitae/addPicture?jobSeekerId=${id}`,
-            data: picture,
-            headers: "content-type: application/json",
-        });
     }
 
     getCvByJobSeekerId(id) {

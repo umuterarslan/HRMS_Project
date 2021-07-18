@@ -15,4 +15,6 @@ public interface BusinessLifeService {
 
     Result updateBusinessLife (BusinessLife businessLife);
 
+    Result deleteBusinessLifeById(int id);
+
 }

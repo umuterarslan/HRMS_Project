@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Table(name = "jobseekers")
 @PrimaryKeyJoinColumn(name = "user_id", referencedColumnName = "id")
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","curriculaVitaes, favoriteJobAdvertsForJobseekers"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","curriculaVitaes"})
 public class JobSeeker extends User {
 
     @Column(name = "first_name")

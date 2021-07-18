@@ -7,4 +7,6 @@ public interface JobSeekerLanguageService {
 
     Result addJobSeekerLanguage(JobSeekerLanguageAddDto jobSeekerLanguageAddDto);
 
+    Result deleteJobSeekerLanguage(int id);
+
 }

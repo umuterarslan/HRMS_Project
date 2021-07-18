@@ -1,6 +1,6 @@
 package com.emin.hrms.api.controller;
 
-import com.emin.hrms.business.abstracts.TechnologieService;
+import com.emin.hrms.business.abstracts.TechnologyService;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.Technology;
@@ -15,10 +15,10 @@ import java.util.List;
 @CrossOrigin
 public class TechnologieController {
 
-    private TechnologieService technologieService;
+    private TechnologyService technologieService;
 
     @Autowired
-    public TechnologieController(TechnologieService technologieService) {
+    public TechnologieController(TechnologyService technologieService) {
         this.technologieService = technologieService;
     }
 
@@ -30,6 +30,11 @@ public class TechnologieController {
     @GetMapping("/gettechnologies")
     public DataResult<List<Technology>> getTechnologies() {
         return this.technologieService.getTechnologies();
+    }
+
+    @DeleteMapping("/deletetechnology")
+    public Result deleteTechnology(@RequestParam int id) {
+        return this.technologieService.deleteTechnology(id);
     }
 
 }

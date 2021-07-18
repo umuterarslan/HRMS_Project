@@ -1,6 +1,7 @@
 package com.emin.hrms.entities.concretes;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "schools")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler","educations"})
 public class School {
 
     @Id
@@ -26,7 +28,7 @@ public class School {
     private String schoolName;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "school", cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "school", cascade = CascadeType.ALL)
     private List<Education> educations;
 
 }

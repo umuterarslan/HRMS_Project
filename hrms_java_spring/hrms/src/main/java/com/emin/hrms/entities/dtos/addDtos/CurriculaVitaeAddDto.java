@@ -11,7 +11,6 @@ public class CurriculaVitaeAddDto {
 
     private int id;
     private int jobSeekerId;
-    private String coverLetter;
-    private String pictureUrl;
+    private String coverLetter = "";
 
 }

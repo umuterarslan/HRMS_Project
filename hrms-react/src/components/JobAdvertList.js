@@ -10,25 +10,35 @@ import {
     Radio,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import Select from "react-select";
 import JobAdvertService from "../services/jobAdvertService";
 
 export default function JobAdvertList() {
-    let jobAdvertService = new JobAdvertService();
+    const jobAdvertService = new JobAdvertService();
+
+    const pageSizes = [
+        { value: 10, label: "10 adet" },
+        { value: 20, label: "20 adet" },
+        { value: 50, label: "50 adet" },
+        { value: 100, label: "100 adet" },
+    ];
 
     const [jobAdverts, setJobAdverts] = useState([]);
     const [sort, setSort] = useState("");
     const [queryFilter, setQueryFilter] = useState("");
+    const [pageSize, setPageSize] = useState(10);
 
     useEffect(() => {
+        setPageSize(10);
         jobAdvertService
-            .getJobAdvertByIsActiveTrueAndIsConfirmedTrue()
+            .getActiveJobAdvertsSortedDesc(pageSize)
             .then((success) => setJobAdverts(success.data.data));
     }, []);
 
     const descSort = () => {
         setSort("DESC");
         jobAdvertService
-            .getJobAdvertByIsActiveTrueAndIsConfirmedTrueSorted(true)
+            .getActiveJobAdvertsSortedDesc(pageSize)
             .then((success) => setJobAdverts(success.data.data))
             .catch((error) => console.log(error));
     };
@@ -36,7 +46,7 @@ export default function JobAdvertList() {
     const ascSort = () => {
         setSort("ASC");
         jobAdvertService
-            .getJobAdvertByIsActiveTrueAndIsConfirmedTrueSorted(false)
+            .getActiveJobAdvertsSortedAsc(pageSize)
             .then((success) => setJobAdverts(success.data.data))
             .catch((error) => console.log(error));
     };
@@ -54,13 +64,19 @@ export default function JobAdvertList() {
         );
     }
 
+    const sizeHandler = (e) => {
+        setPageSize(e.value);
+    };
+
+    console.log(pageSize);
+
     return (
         <div>
             <Grid>
                 <Grid.Row>
                     <Grid.Column width={4}>
                         <div className="find-job-filter">
-                            <Menu vertical>
+                            <Menu vertical style={{ width: "100%" }}>
                                 <Menu.Item>
                                     <Input
                                         type="text"
@@ -69,6 +85,13 @@ export default function JobAdvertList() {
                                             setQueryFilter(event.target.value)
                                         }
                                     />
+                                </Menu.Item>
+                                <Menu.Item>
+                                    <Select
+                                        placeholder="Sayfadaki ilan sayısı"
+                                        options={pageSizes}
+                                        onChange={sizeHandler}
+                                    ></Select>
                                 </Menu.Item>
                                 <Menu.Item>
                                     <Icon

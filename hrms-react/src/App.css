@@ -180,9 +180,53 @@ body {
     background-color: #0984e3 !important;
 }
 
-.cv-select div text{
-    width:210px !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-    overflow:hidden !important;
+.cv-select {
+    max-width: 10rem important;
+}
+
+.cv-detail input[type="text"] {
+    height: 3rem;
+    width: 13rem;
+    border: solid 1px #777;
+    border-radius: 5px;
+}
+
+.cv-personel-infos {
+    width: 40%;
+    height: 10%;
+    margin-bottom: 4% !important;
+    font-family: "Encode Sans SC", sans-serif;
+    color: black !important;
+    font-size: large;
+    background-color: #f9fafb !important;
+}
+
+.cv-personel-infos div {
+    padding: 3px;
+    padding-left: 20px;
+}
+
+.cv-personel-infos-ribbon {
+    margin-left: -4% !important;
+    background-color: black !important;
+}
+
+.pictureFileInput {
+    display: none;
+}
+
+.pictureFileLabel {
+    text-align: center;
+    cursor: pointer;
+    background-color: rgb(67, 218, 79);
+    color: white;
+    width: 6rem !important;
+    height: 3rem;
+    margin-left: 7%;
+    padding: 3%;
+}
+
+.create-job-advert-selects {
+    font-style: italic !important;
+    color: red !important;
 }

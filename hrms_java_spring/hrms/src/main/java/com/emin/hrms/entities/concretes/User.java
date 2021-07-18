@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 
@@ -22,10 +23,12 @@ public class User {
     private int id;
 
     @Column(name = "email")
+    @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     private String email;
 
     @Column(name = "password")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Cascade(org.hibernate.annotations.CascadeType.DETACH)
     private String password;
 
 }

@@ -22,6 +22,8 @@ export default function JobAdvertDetail() {
             .then((success) => setJobAdvert(success.data.data));
     }, []);
 
+    console.log(jobAdvert);
+
     return (
         <div
             style={{
@@ -44,7 +46,7 @@ export default function JobAdvertDetail() {
                             <Image
                                 floated="right"
                                 size="tiny"
-                                src="https://react.semantic-ui.com/images/avatar/large/steve.jpg"
+                                src={`${jobAdvert.employer?.pictureUrl}`}
                             />
                             <Card.Header>
                                 {jobAdvert.jobPosition?.jobTitle}

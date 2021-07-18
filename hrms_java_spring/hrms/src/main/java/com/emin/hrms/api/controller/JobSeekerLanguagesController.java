@@ -23,4 +23,9 @@ public class JobSeekerLanguagesController {
         return this.jobSeekerLanguageService.addJobSeekerLanguage(jobSeekerLanguageAddDto);
     }
 
+    @DeleteMapping("/deletejobseekerlanguage")
+    public Result deleteJobSeekerLanguage(@RequestParam int id) {
+        return this.jobSeekerLanguageService.deleteJobSeekerLanguage(id);
+    }
+
 }

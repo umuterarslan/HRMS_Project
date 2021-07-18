@@ -35,4 +35,9 @@ public class BusinessLifeController {
         return this.businessLifeService.updateBusinessLife(businessLife);
     }
 
+    @DeleteMapping("/deletebusinesslifebyid")
+    public Result deleteBusinessLifeById(@RequestParam int id) {
+        return this.businessLifeService.deleteBusinessLifeById(id);
+    }
+
 }
