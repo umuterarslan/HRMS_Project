@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmailSenderManager {
 
-    public String emailSender(User user) {
-        return user.getEmail() + " adresinden üyeliğinizi onaylayın.";
+    public String emailSender(String email) {
+        return email + " adresinden hesabınızı onaylayın.";
     }
 
 }

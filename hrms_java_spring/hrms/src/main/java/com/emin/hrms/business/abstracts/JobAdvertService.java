@@ -3,9 +3,8 @@ package com.emin.hrms.business.abstracts;
 import com.emin.hrms.core.utilities.results.DataResult;
 import com.emin.hrms.core.utilities.results.Result;
 import com.emin.hrms.entities.concretes.JobAdvert;
-import com.emin.hrms.entities.concretes.SystemPersonel;
 import com.emin.hrms.entities.dtos.addDtos.JobAdvertAddDto;
-import org.springframework.boot.autoconfigure.batch.BatchProperties;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -32,5 +31,13 @@ public interface JobAdvertService {
     DataResult<JobAdvert> getJobAdvertById(int id);
 
     Result deleteJobAdvertById(int id);
+
+    DataResult countActiveAndConfirmedByEmployerId(int id);
+
+    DataResult countAllActiveAndConfirmed();
+
+    DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndEmployer_Id(int id);
+
+    DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTruePageable(int pageNo, int pageSize);
 
 }

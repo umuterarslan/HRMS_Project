@@ -4,6 +4,6 @@ import com.emin.hrms.entities.concretes.User;
 
 public interface EmailSenderService {
 
-    String emailSender(User user);
+    String emailSender(String email);
 
 }

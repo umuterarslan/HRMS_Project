@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class FavoriteJobAdvertsForJobseekersAddDto {
+public class SavedJobAdvertsAddDto {
 
     private int id;
     private int jobSeekerId;

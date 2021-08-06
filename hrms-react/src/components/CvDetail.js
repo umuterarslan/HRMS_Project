@@ -27,7 +27,7 @@ export default function CvDetail() {
     const [cvBusinessLives, setCvBusinessLives] = useState([]);
     const [cvTechnologies, setCvTechnologies] = useState([]);
     const [cvJobSeekerLanguage, setCvJobSeekerLanguage] = useState([]);
-    const [cvPicture, setCvPicture] = useState("");
+    // const [cvPicture, setCvPicture] = useState("");
     const [cvSocialMedia, setCvSocialMedia] = useState([]);
 
     useEffect(() => {
@@ -39,7 +39,7 @@ export default function CvDetail() {
             .getCvByJobSeekerId(jobSeekerId)
             .then((success) => {
                 setCurriculaVitae(success.data.data);
-                setCvPicture(success.data.data.pictureUrl);
+                // setCvPicture(success.data.data.pictureUrl);
                 setCvSocialMedia(success.data.data.socialMedias);
                 setCvTechnologies(success.data.data.technologies);
                 setCvJobSeekerLanguage(success.data.data.jobSeekerLanguages);
@@ -370,7 +370,7 @@ export default function CvDetail() {
                                                         <Icon
                                                             name="star"
                                                             color={
-                                                                jobSeekerLanguage.languageDegree ==
+                                                                jobSeekerLanguage.languageDegree ===
                                                                 5
                                                                     ? "yellow"
                                                                     : ""

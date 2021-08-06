@@ -17,8 +17,8 @@ public class EmailSenderManagerAdapter implements EmailSenderService {
     }
 
     @Override
-    public String emailSender(User user) {
-        return this.emailSenderManager.emailSender(user);
+    public String emailSender(String email) {
+        return this.emailSenderManager.emailSender(email);
     }
 
 }

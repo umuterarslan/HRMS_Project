@@ -1,6 +1,12 @@
 import React from "react";
-import { Button, Container } from "semantic-ui-react";
-import { Formik, Form } from "formik";
+import {
+    Button,
+    Container,
+    FormField,
+    Label,
+    Checkbox,
+} from "semantic-ui-react";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import JobSeekerService from "../services/jobSeekerService";
 import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
@@ -10,7 +16,11 @@ export default function SignUpJobSeeker() {
     const jobSeekerService = new JobSeekerService();
 
     return (
-        <div>
+        <div
+            style={{
+                width: "44%",
+            }}
+        >
             <ToastContainer />
             <Container>
                 <Formik
@@ -32,7 +42,8 @@ export default function SignUpJobSeeker() {
                         lastName: Yup.string().required(
                             "Bu alan boş bırakılamaz!"
                         ),
-                        identityNumber: Yup.string()
+                        identityNumber: Yup.number()
+                            .typeError("Sadece rakamlardan oluşmalıdır!")
                             .required("Bu alan boş bırakılamaz")
                             .min(
                                 11,
@@ -59,7 +70,7 @@ export default function SignUpJobSeeker() {
                             "Kayıt olabilmek için sözleşme kabul edilmelidir!"
                         ),
                     })}
-                    onSubmit={(values) => {
+                    onSubmit={(values, actions) => {
                         if (!values.termsAccepted) {
                             toast.error(
                                 "Kullanıcı sözleşmesi kabul edilmeli!",
@@ -94,15 +105,21 @@ export default function SignUpJobSeeker() {
                                             position: toast.POSITION.TOP_RIGHT,
                                             transition: Bounce,
                                         });
+                                        setTimeout(() => {
+                                            actions.setSubmitting(false);
+                                        }, 1000);
                                     } else {
                                         toast.success(res.message, {
                                             draggable: true,
                                             position: toast.POSITION.TOP_RIGHT,
                                             transition: Zoom,
                                         });
+                                        setTimeout(() => {
+                                            actions.resetForm();
+                                        }, 1000);
                                     }
                                 })
-                                .catch((err) => {
+                                .catch(() => {
                                     toast.error("Bir hata oluştu!");
                                 });
                         }
@@ -114,99 +131,122 @@ export default function SignUpJobSeeker() {
                         touched,
                         handleSubmit,
                         handleChange,
-                        isSubmitting,
                         dirty,
                     }) => (
-                        <Form
-                            onSubmit={handleSubmit}
-                            className="sign-up-form"
-                            style={{
-                                width: "30rem",
-                            }}
-                        >
-                            <div className="field">
-                                {errors.firstName && touched.firstName ? (
-                                    <div>{errors.firstName}</div>
-                                ) : null}
-                                <input
-                                    id="firstName"
+                        <Form onSubmit={handleSubmit} className="ui form">
+                            <FormField>
+                                <Field
+                                    name="firstName"
                                     type="text"
                                     placeholder="Ad"
                                     value={values.firstName}
                                     onChange={handleChange}
                                 />
-                            </div>
-                            {errors.lastName && touched.lastName ? (
-                                <div>{errors.lastName}</div>
-                            ) : null}
-                            <input
-                                id="lastName"
-                                type="text"
-                                placeholder="Soyad"
-                                value={values.lastName}
-                                onChange={handleChange}
-                            />
-                            {errors.identityNumber && touched.identityNumber ? (
-                                <div>{errors.identityNumber}</div>
-                            ) : null}
-                            <input
-                                id="identityNumber"
-                                type="text"
-                                placeholder="Vatandaşlık Numarası"
-                                maxLength={11}
-                                value={values.identityNumber}
-                                onChange={handleChange}
-                            />
-                            {errors.email && touched.email ? (
-                                <div>{errors.email}</div>
-                            ) : null}
-                            <input
-                                id="email"
-                                type="email"
-                                placeholder="E-Posta"
-                                value={values.email}
-                                onChange={handleChange}
-                            />
-                            {errors.email && touched.email ? (
-                                <div>{errors.email}</div>
-                            ) : null}
-                            <input
-                                id="birthDate"
-                                type="date"
-                                placeholder="Doğum Tarihi"
-                                value={values.birthDate}
-                                onChange={handleChange}
-                            />
-                            {errors.password && touched.password ? (
-                                <div>{errors.password}</div>
-                            ) : null}
-                            <input
-                                id="password"
-                                type="password"
-                                placeholder="Parola"
-                                value={values.password}
-                                onChange={handleChange}
-                            />
-                            {errors.confirmPassword &&
-                            touched.confirmPassword ? (
-                                <div>{errors.confirmPassword}</div>
-                            ) : null}
-                            <input
-                                id="confirmPassword"
-                                type="password"
-                                placeholder="Parola Tekrar"
-                                value={values.confirmPassword}
-                                onChange={handleChange}
-                            />
-                            <label className="checkbox-div">
-                                <input
-                                    id="termsAccepted"
-                                    type="checkbox"
+                                {errors.firstName && touched.firstName ? (
+                                    <Label basic color="red" pointing>
+                                        {errors.firstName}
+                                    </Label>
+                                ) : null}
+                            </FormField>
+                            <FormField>
+                                <Field
+                                    name="lastName"
+                                    type="text"
+                                    placeholder="Soyad"
+                                    value={values.lastName}
                                     onChange={handleChange}
                                 />
-                                Kullunıcı sözleşmesini okudum kabul ediyorum.
-                            </label>
-                            <Button floated="right" type="submit">
+                                {errors.lastName && touched.lastName ? (
+                                    <Label basic color="red" pointing>
+                                        {errors.lastName}
+                                    </Label>
+                                ) : null}
+                            </FormField>
+                            <FormField>
+                                <Field
+                                    name="identityNumber"
+                                    type="text"
+                                    placeholder="Vatandaşlık Numarası"
+                                    maxLength={11}
+                                    value={values.identityNumber}
+                                    onChange={handleChange}
+                                />
+                                {errors.identityNumber &&
+                                touched.identityNumber ? (
+                                    <Label basic color="red" pointing>
+                                        {errors.identityNumber}
+                                    </Label>
+                                ) : null}
+                            </FormField>
+                            <FormField>
+                                <Field
+                                    name="email"
+                                    type="email"
+                                    placeholder="E-Posta"
+                                    value={values.email}
+                                    onChange={handleChange}
+                                />
+                                {errors.email && touched.email ? (
+                                    <Label basic color="red" pointing>
+                                        {errors.email}
+                                    </Label>
+                                ) : null}
+                            </FormField>
+                            <FormField>
+                                <Field
+                                    name="birthDate"
+                                    type="date"
+                                    placeholder="Doğum Tarihi"
+                                    value={values.birthDate}
+                                    onChange={handleChange}
+                                />
+                                {errors.birthDate && touched.birthDate ? (
+                                    <Label basic color="red" pointing>
+                                        {errors.birthDate}
+                                    </Label>
+                                ) : null}
+                            </FormField>
+                            <FormField>
+                                <Field
+                                    name="password"
+                                    type="password"
+                                    placeholder="Parola"
+                                    value={values.password}
+                                    onChange={handleChange}
+                                />
+                                {errors.password && touched.password ? (
+                                    <Label basic color="red" pointing>
+                                        {errors.password}
+                                    </Label>
+                                ) : null}
+                            </FormField>
+                            <FormField>
+                                <Field
+                                    name="confirmPassword"
+                                    type="password"
+                                    placeholder="Parola Tekrar"
+                                    value={values.confirmPassword}
+                                    onChange={handleChange}
+                                />
+                            </FormField>
+                            <FormField>
+                                <Checkbox
+                                    name="termsAccepted"
+                                    label="Kullunıcı sözleşmesini okudum kabul
+                                        ediyorum."
+                                    onChange={handleChange}
+                                    onClick={() =>
+                                        (values.termsAccepted =
+                                            !values.termsAccepted)
+                                    }
+                                />
+                            </FormField>
+                            <Button
+                                type="submit"
+                                color="green"
+                                disabled={!dirty}
+                                fluid
+                            >
                                 Üye Ol
                             </Button>
                         </Form>

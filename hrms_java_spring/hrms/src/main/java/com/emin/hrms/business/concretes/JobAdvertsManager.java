@@ -74,9 +74,7 @@ public class JobAdvertsManager implements JobAdvertService {
 
     @Override
     public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableDesc(int pageNo,int pageSize) {
-        Sort sort;
-        sort = Sort.by(Sort.Direction.DESC, "releaseDate");
-
+        Sort sort = Sort.by(Sort.Direction.DESC, "releaseDate");
         Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
         if (this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable).size() > 0) {
             return new SuccessDataResult<>(
@@ -86,24 +84,32 @@ public class JobAdvertsManager implements JobAdvertService {
 
         return new ErrorDataResult<>(
                 this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable),
-                "Sıralanacak iş ilanı bulunamadı.");
+                "Sıralanacak iş ilanı bulunamadı!");
     }
 
     @Override
     public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableAsc(int pageNo, int pageSize) {
-        Sort sort;
-        sort = Sort.by(Sort.Direction.ASC, "releaseDate");
-
+        Sort sort = Sort.by(Sort.Direction.ASC, "releaseDate");
         Pageable pageable = PageRequest.of(pageNo,pageSize,sort);
         if (this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable).size() > 0) {
             return new SuccessDataResult<>(
                     this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable),
                     "İş ilanları en eski olarak sıralandı.");
+        } else {
+            return new ErrorDataResult<>(
+                    this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable),
+                    "Sıralanacak iş ilanı bulunamadı!");
         }
+    }
 
-        return new ErrorDataResult<>(
-                this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable),
-                "Sıralanacak iş ilanı bulunamadı.");
+    @Override
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTruePageable (int pageNo, int pageSize) {
+        Pageable pageable = PageRequest.of(pageNo, pageSize);
+        if (this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable).size() > 0) {
+            return new SuccessDataResult<>(this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrue(pageable), "İş işanları listelendi.");
+        } else {
+            return new ErrorDataResult<>(null, "Sıralanacak iş ilanı bulunamadı!");
+        }
     }
 
     @Override
@@ -131,6 +137,29 @@ public class JobAdvertsManager implements JobAdvertService {
     public Result deleteJobAdvertById(int id) {
         this.jobAdvertsDao.deleteJobAdvertById(id);
         return new SuccessResult("Silme başarılı.");
+    }
+
+    @Override
+    public DataResult countActiveAndConfirmedByEmployerId(int id) {
+        if (this.jobAdvertsDao.countActiveAndConfirmedByEmployerId(id) > 0) {
+            return new SuccessDataResult(this.jobAdvertsDao.countActiveAndConfirmedByEmployerId(id), "İş verene ait iş ilanları sayısı getirme başarılı.");
+        } else {
+            return new ErrorDataResult(null, "İş verene ait paylaşılan iş ilanı yok!");
+        }
+    }
+
+    @Override
+    public DataResult countAllActiveAndConfirmed() {
+        if (this.jobAdvertsDao.countAllActiveAndConfirmed() > 0) {
+            return new SuccessDataResult(this.jobAdvertsDao.countAllActiveAndConfirmed(), "Toplam iş ilanları sayısı getirme başarılı.");
+        } else {
+            return new ErrorDataResult(null, "Henüz paylaşılan bir iş ilanı yok!");
+        }
+    }
+
+    @Override
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndEmployer_Id(int id) {
+        return new SuccessDataResult<>(this.jobAdvertsDao.getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndEmployer_Id(id), "Başarılı.");
     }
 
 }

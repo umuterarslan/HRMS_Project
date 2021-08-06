@@ -72,10 +72,29 @@ public class JobAdvertsController {
         return this.jobAdvertService.getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableDesc(pageNo-1,pageSize);
     }
 
-
     @GetMapping("/getjobadvertbyisactivetrueandisconfirmedtrueandpageableasc")
     public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableAsc(@RequestParam int pageNo,int pageSize) {
         return this.jobAdvertService.getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndPageableAsc(pageNo-1,pageSize);
+    }
+
+    @GetMapping("/countactiveandconfirmedbyemployerid")
+    public DataResult countActiveAndConfirmedByEmployerId(@RequestParam int id) {
+        return this.jobAdvertService.countActiveAndConfirmedByEmployerId(id);
+    }
+
+    @GetMapping("/countallactiveandconfirmed")
+    public DataResult countAllActiveAndConfirmed() {
+        return this.jobAdvertService.countAllActiveAndConfirmed();
+    }
+
+    @GetMapping("/getactiveandconfirmedbyemployerid")
+    public DataResult<List<JobAdvert>> getActiveAndConfirmedByEmployerId(@RequestParam int id) {
+        return this.jobAdvertService.getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndEmployer_Id(id);
+    }
+
+    @GetMapping("/getjobadvertbyactiveandconfirmedpageable")
+    public DataResult<List<JobAdvert>> getJobAdvertByIsActiveTrueAndIsConfirmedTruePageable(@RequestParam int pageNo, @RequestParam int pageSize) {
+        return this.jobAdvertService.getJobAdvertByIsActiveTrueAndIsConfirmedTruePageable(pageNo-1, pageSize);
     }
 
 }

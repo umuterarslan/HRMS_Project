@@ -12,7 +12,7 @@
     <artifactId>hrms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>hrms</name>
-    <description>Demo project for Spring Boot</description>
+    <description>Kodlama.io - Human Resources Management System</description>
     <properties>
         <java.version>16</java.version>
     </properties>

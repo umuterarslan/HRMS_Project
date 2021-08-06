@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button, Container, FormField } from "semantic-ui-react";
 import { Formik, Form, Field } from "formik";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import { ToastContainer, toast, Bounce } from "react-toastify";
 import CurriculaVitaeService from "../services/curriculaVitaeService";
 
 export default function CreateCv() {

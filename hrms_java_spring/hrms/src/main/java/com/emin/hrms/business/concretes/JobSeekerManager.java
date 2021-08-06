@@ -41,7 +41,7 @@ public class JobSeekerManager implements JobSeekerService {
                 return new ErrorResult("Kayıt olan kişinin kimlik numarası gerçek değil!");
             } else {
                 this.jobSeekerDao.save(jobSeeker);
-                return new SuccessResult("İş arayan olarak kayıt olundu! " + emailSenderService.emailSender(jobSeeker) );
+                return new SuccessResult("İş arayan olarak kayıt olundu! " + emailSenderService.emailSender(jobSeeker.getEmail()) );
             }
         } catch (Exception e) {
             if (e.getMessage()

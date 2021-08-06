@@ -23,10 +23,9 @@ export default function SystemPersonelCreate() {
         password: Yup.string()
             .required("Bu alan boş bırakılamaz!")
             .min(6, "En az 6 karakterden oluşmalıdır!"),
-        passwordConfirmation: Yup.string().oneOf(
-            [Yup.ref("password"), null],
-            "Parolalar eşit değil!"
-        ),
+        passwordConfirmation: Yup.string()
+            .oneOf([Yup.ref("password"), null], "Parolalar eşit değil!")
+            .required("Bu alan boş bırakılamaz!"),
         username: Yup.string().required("Bu alan boş bırakılamaz!"),
     });
 

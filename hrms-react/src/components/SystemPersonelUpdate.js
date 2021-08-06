@@ -27,8 +27,8 @@ export default function SystemPersonelUpdate() {
 
     const initialValues = {
         id: systemPersonelId,
-        username: "",
-        email: "",
+        username: systemPersonel.username,
+        email: systemPersonel.email,
     };
 
     const formSchema = Yup.object({
@@ -57,6 +57,7 @@ export default function SystemPersonelUpdate() {
                 }}
             >
                 <Formik
+                    enableReinitialize={true}
                     initialValues={initialValues}
                     validationSchema={formSchema}
                     onSubmit={(values, actions) => {
@@ -99,7 +100,7 @@ export default function SystemPersonelUpdate() {
                             <FormField>
                                 Kullanıcı Adı
                                 <Field
-                                    placeHolder={systemPersonel.username}
+                                    defaulValue={initialValues.username}
                                     name="username"
                                     type="text"
                                     value={values.username}
@@ -113,7 +114,7 @@ export default function SystemPersonelUpdate() {
                             <FormField>
                                 E-Posta
                                 <Field
-                                    placeHolder={systemPersonel.email}
+                                    defaulValue={initialValues.email}
                                     name="email"
                                     type="email"
                                     value={values.email}

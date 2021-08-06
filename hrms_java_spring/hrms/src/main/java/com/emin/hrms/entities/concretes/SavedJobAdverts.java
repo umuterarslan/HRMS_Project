@@ -1,6 +1,5 @@
 package com.emin.hrms.entities.concretes;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,8 +11,8 @@ import javax.validation.constraints.NotNull;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "favorite_job_adverts_for_jobseekers")
-public class FavoriteJobAdvertsForJobseekers {
+@Table(name = "saved_job_adverts")
+public class SavedJobAdverts {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

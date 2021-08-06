@@ -45,11 +45,16 @@ public class EmployerController {
 
     @PostMapping("/addemployerpicture")
     public Result addEmployerPicture(int employerId, MultipartFile file) throws IOException {
-        return this.employerService.uploadPicture(employerId ,file);
+        return this.employerService.uploadPicture(employerId, file);
     }
 
     @PutMapping("/updateemployer")
-    public Result updateEmployer(@RequestBody Employer employer) {
-        return this.employerService.updateEmployer(employer);
+    public Result updateEmployer(@RequestParam int id, @RequestParam String companyName, @RequestParam String email, @RequestParam String phoneNumber, @RequestParam String website) {
+        return this.employerService.updateEmployer(id, companyName, email, phoneNumber, website);
+    }
+
+    @PostMapping("/setupdaterequest")
+    public Result setUpdateRequest(@RequestParam int id, @RequestParam Boolean bool) {
+        return this.employerService.setUpdateRequest(id, bool);
     }
 }

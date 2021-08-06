@@ -54,10 +54,10 @@ public class JobAdvert {
     private City city;
 
     @Column(name = "is_active")
-    private boolean isActive = false;
+    private boolean isActive = true;
 
     @Column(name = "is_confirmed")
-    private boolean isConfirmed = false;
+    private boolean isConfirmed = true;
 
     @Column(name = "part_or_full_time")
     private String partOrFullTime;
@@ -67,6 +67,6 @@ public class JobAdvert {
 
     @JsonIgnore
     @OneToMany(mappedBy = "jobAdvert", cascade = CascadeType.DETACH)
-    private List<FavoriteJobAdvertsForJobseekers> favoriteJobAdvertsForJobseekers;
+    private List<SavedJobAdverts> savedJobAdverts;
 
 }

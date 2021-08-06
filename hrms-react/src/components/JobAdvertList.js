@@ -8,10 +8,13 @@ import {
     Input,
     Icon,
     Radio,
+    Pagination,
+    Container,
 } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import Select from "react-select";
 import JobAdvertService from "../services/jobAdvertService";
+import { findByText } from "@testing-library/react";
 
 export default function JobAdvertList() {
     const jobAdvertService = new JobAdvertService();
@@ -27,29 +30,13 @@ export default function JobAdvertList() {
     const [sort, setSort] = useState("");
     const [queryFilter, setQueryFilter] = useState("");
     const [pageSize, setPageSize] = useState(10);
+    const [pageNo, setPageNo] = useState(1);
+    const [totalPage, setTotalPage] = useState(1);
+    const [isThereJobAdvert, setIsThereJobAdvert] = useState(false);
 
     useEffect(() => {
-        setPageSize(10);
-        jobAdvertService
-            .getActiveJobAdvertsSortedDesc(pageSize)
-            .then((success) => setJobAdverts(success.data.data));
+        getJobAdvertsMixed(pageNo, pageSize);
     }, []);
-
-    const descSort = () => {
-        setSort("DESC");
-        jobAdvertService
-            .getActiveJobAdvertsSortedDesc(pageSize)
-            .then((success) => setJobAdverts(success.data.data))
-            .catch((error) => console.log(error));
-    };
-
-    const ascSort = () => {
-        setSort("ASC");
-        jobAdvertService
-            .getActiveJobAdvertsSortedAsc(pageSize)
-            .then((success) => setJobAdverts(success.data.data))
-            .catch((error) => console.log(error));
-    };
 
     function search(jobAdverts) {
         return jobAdverts.filter(
@@ -64,11 +51,79 @@ export default function JobAdvertList() {
         );
     }
 
-    const sizeHandler = (e) => {
-        setPageSize(e.value);
+    const getJobAdvertsMixed = (pageNo, pageSize) => {
+        jobAdvertService
+            .getActiveAndConfirmedPageable(pageNo, pageSize)
+            .then((success) => {
+                if (success.data.data <= 0) {
+                    setIsThereJobAdvert(false);
+                } else {
+                    getTotalPage(pageSize);
+                    setIsThereJobAdvert(true);
+                    setJobAdverts(success.data.data);
+                }
+            });
     };
 
-    console.log(pageSize);
+    const getTotalPage = (pageSize) => {
+        jobAdvertService.getNumberOfAllJobAdverts().then((success) => {
+            const number = success.data.data;
+            return setTotalPage(Math.ceil(number / pageSize));
+        });
+    };
+
+    const descSort = (pageNo, pageSize) => {
+        setSort("DESC");
+        jobAdvertService
+            .getActiveJobAdvertsSortedDesc(pageNo, pageSize)
+            .then((success) => {
+                if (success.data.data <= 0) {
+                    setIsThereJobAdvert(false);
+                } else {
+                    getTotalPage(pageSize);
+                    setIsThereJobAdvert(true);
+                    setJobAdverts(success.data.data);
+                }
+            });
+    };
+
+    const ascSort = (pageNo, pageSize) => {
+        setSort("ASC");
+        jobAdvertService
+            .getActiveJobAdvertsSortedAsc(pageNo, pageSize)
+            .then((success) => {
+                if (success.data.data <= 0) {
+                    setIsThereJobAdvert(false);
+                } else {
+                    getTotalPage(pageSize);
+                    setIsThereJobAdvert(true);
+                    setJobAdverts(success.data.data);
+                }
+            });
+    };
+
+    const pageSizeHandler = (e) => {
+        getTotalPage(e.value);
+        setPageSize(e.value);
+        if (sort === "DESC") {
+            descSort(pageNo, e.value);
+        } else if (sort === "ASC") {
+            ascSort(pageNo, e.value);
+        } else {
+            getJobAdvertsMixed(pageNo, e.value);
+        }
+    };
+
+    const pageChangeHandler = (event, data) => {
+        setPageNo(data.activePage);
+        if (sort === "DESC") {
+            descSort(data.activePage, pageSize);
+        } else if (sort === "ASC") {
+            ascSort(data.activePage, pageSize);
+        } else {
+            getJobAdvertsMixed(data.activePage, pageSize);
+        }
+    };
 
     return (
         <div>
@@ -90,7 +145,7 @@ export default function JobAdvertList() {
                                     <Select
                                         placeholder="Sayfadaki ilan sayısı"
                                         options={pageSizes}
-                                        onChange={sizeHandler}
+                                        onChange={pageSizeHandler}
                                     ></Select>
                                 </Menu.Item>
                                 <Menu.Item>
@@ -105,7 +160,9 @@ export default function JobAdvertList() {
                                                 label="Önce en yeni"
                                                 name="sortRadio"
                                                 checked={sort === "DESC"}
-                                                onClick={descSort}
+                                                onClick={() =>
+                                                    descSort(pageNo, pageSize)
+                                                }
                                             />
                                         </Menu.Item>
                                         <Menu.Item>
@@ -113,7 +170,9 @@ export default function JobAdvertList() {
                                                 label="Önce en eski"
                                                 name="sortRadio"
                                                 checked={sort === "ASC"}
-                                                onClick={ascSort}
+                                                onClick={() =>
+                                                    ascSort(pageNo, pageSize)
+                                                }
                                             />
                                         </Menu.Item>
                                     </Menu.Menu>
@@ -173,44 +232,79 @@ export default function JobAdvertList() {
                         ></div>
                     </Grid.Column>
                     <Grid.Column width={11}>
-                        <CardGroup>
-                            {search(jobAdverts).map((jobAdvert) => (
-                                <Card
-                                    style={{ minWidth: "70%" }}
-                                    as={Link}
-                                    to={`/jobAdvertDetail/${jobAdvert.id}`}
-                                    key={jobAdvert.id}
-                                >
-                                    <Card.Content
-                                        style={{
-                                            boxShadow:
-                                                "0 6px 8px 0 rgba(0, 0, 0, 0.2)",
-                                        }}
-                                    >
-                                        <Image
-                                            floated="right"
-                                            size="tiny"
-                                            src={`${jobAdvert.employer.pictureUrl}`}
-                                        />
-                                        <Card.Header
-                                            style={{ color: "#0984e3" }}
+                        {!isThereJobAdvert ? (
+                            <h2 style={{ textAlign: "center" }}>
+                                Henüz gösterilecel ilan bulunmamaktadır!
+                            </h2>
+                        ) : (
+                            <div>
+                                <CardGroup>
+                                    {search(jobAdverts).map((jobAdvert) => (
+                                        <Card
+                                            style={{ minWidth: "70%" }}
+                                            as={Link}
+                                            to={`/jobAdvertDetail/${jobAdvert.id}`}
+                                            key={jobAdvert.id}
                                         >
-                                            {jobAdvert.jobPosition.jobTitle}
-                                        </Card.Header>
-                                        <Card.Meta>
-                                            {jobAdvert.city.cityName}
-                                        </Card.Meta>
-                                        <Card.Meta>
-                                            {jobAdvert.employer.companyName}
-                                        </Card.Meta>
-                                        <Card.Description>
-                                            {"Son Başvuru Tarihi: "}
-                                            {jobAdvert.expireDate}{" "}
-                                        </Card.Description>
-                                    </Card.Content>
-                                </Card>
-                            ))}
-                        </CardGroup>
+                                            <Card.Content
+                                                style={{
+                                                    boxShadow:
+                                                        "0 6px 8px 0 rgba(0, 0, 0, 0.2)",
+                                                }}
+                                            >
+                                                <Image
+                                                    floated="right"
+                                                    size="tiny"
+                                                    src={`${jobAdvert.employer.pictureUrl}`}
+                                                />
+                                                <Card.Header>
+                                                    {jobAdvert.description}.
+                                                    ilan
+                                                </Card.Header>
+                                                <Card.Header
+                                                    style={{ color: "#0984e3" }}
+                                                >
+                                                    {
+                                                        jobAdvert.jobPosition
+                                                            .jobTitle
+                                                    }
+                                                </Card.Header>
+                                                <Card.Meta>
+                                                    {jobAdvert.city.cityName}
+                                                </Card.Meta>
+                                                <Card.Meta>
+                                                    {
+                                                        jobAdvert.employer
+                                                            .companyName
+                                                    }
+                                                </Card.Meta>
+                                                <Card.Description>
+                                                    {"Son Başvuru Tarihi: "}
+                                                    {jobAdvert.expireDate}{" "}
+                                                </Card.Description>
+                                            </Card.Content>
+                                        </Card>
+                                    ))}
+                                </CardGroup>
+                            </div>
+                        )}
+                        <Grid.Row>
+                            <Container
+                                style={{
+                                    marginTop: "3%",
+                                }}
+                                textAlign="center"
+                            >
+                                <div style={{ marginLeft: "auto" }}>
+                                    <Pagination
+                                        activePage={pageNo}
+                                        totalPages={totalPage}
+                                        onPageChange={pageChangeHandler}
+                                        ellipsisItem={null}
+                                    />
+                                </div>
+                            </Container>
+                        </Grid.Row>
                     </Grid.Column>
                 </Grid.Row>
             </Grid>

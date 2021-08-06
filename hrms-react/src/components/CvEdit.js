@@ -123,7 +123,7 @@ export default function CreateCv() {
             });
     }, []);
 
-    console.log(cvEducations);
+    console.log(curriculaVitae);
 
     const schoolHandler = (e) => {
         educationObject.schoolId = e.value;
@@ -287,6 +287,7 @@ export default function CreateCv() {
     };
 
     const coverLetterHandler = (e) => {
+        console.log(e);
         coverLetterObject.coverLetter = e;
     };
 
@@ -914,7 +915,7 @@ export default function CreateCv() {
                                                         <Icon
                                                             name="star"
                                                             color={
-                                                                jobSeekerLanguage.languageDegree ==
+                                                                jobSeekerLanguage.languageDegree ===
                                                                 5
                                                                     ? "yellow"
                                                                     : ""
@@ -965,6 +966,7 @@ export default function CreateCv() {
                                     rows={10}
                                     maxLength={1000}
                                     placeholder="1000 karakter ile sınırlıdır."
+                                    defaultValue={curriculaVitae.coverLetter}
                                     onChange={(event) =>
                                         coverLetterHandler(event.target.value)
                                     }

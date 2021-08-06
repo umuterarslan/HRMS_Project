@@ -39,6 +39,6 @@ public class JobSeeker extends User {
 
     @JsonIgnore
     @OneToMany(mappedBy = "jobSeeker", cascade = CascadeType.DETACH)
-    private List<FavoriteJobAdvertsForJobseekers> favoriteJobAdvertsForJobseekers;
+    private List<SavedJobAdverts> savedJobAdverts;
 
 }

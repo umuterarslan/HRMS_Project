@@ -11,15 +11,15 @@ export default class JobAdvertService {
         );
     }
 
-    getActiveJobAdvertsSortedAsc(pageSize) {
-        return axios.get(
-            `http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrueandpageableasc?pageNo=1&pageSize=${pageSize}`
+    async getActiveJobAdvertsSortedAsc(pageNo, pageSize) {
+        return await axios.get(
+            `http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrueandpageableasc?pageNo=${pageNo}&pageSize=${pageSize}`
         );
     }
 
-    getActiveJobAdvertsSortedDesc(pageSize) {
-        return axios.get(
-            `http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrueandpageabledesc?pageNo=1&pageSize=${pageSize}`
+    async getActiveJobAdvertsSortedDesc(pageNo, pageSize) {
+        return await axios.get(
+            `http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrueandpageabledesc?pageNo=${pageNo}&pageSize=${pageSize}`
         );
     }
 
@@ -81,8 +81,31 @@ export default class JobAdvertService {
             });
     }
 
-    getJobAdvertByIsActiveTrueAndIsConfirmedTrue() {
-        return axios.get(`http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrue
+    async getJobAdvertByIsActiveTrueAndIsConfirmedTrue() {
+        return await axios.get(`http://localhost:8080/api/jobadverts/getjobadvertbyisactivetrueandisconfirmedtrue
         `);
+    }
+
+    async getNumberOfJobAdvertsByEmployerId(id) {
+        return await axios.get(
+            `http://localhost:8080/api/jobadverts/countactiveandconfirmedbyemployerid?id=${id}`
+        );
+    }
+
+    async getNumberOfAllJobAdverts() {
+        return await axios.get(`http://localhost:8080/api/jobadverts/countallactiveandconfirmed
+        `);
+    }
+
+    async getActiveAndConfirmedByEmployerId(id) {
+        return await axios.get(
+            `http://localhost:8080/api/jobadverts/getactiveandconfirmedbyemployerid?id=${id}`
+        );
+    }
+
+    async getActiveAndConfirmedPageable(pageNo, pageSize) {
+        return await axios.get(
+            `http://localhost:8080/api/jobadverts/getjobadvertbyactiveandconfirmedpageable?pageNo=${pageNo}&pageSize=${pageSize}`
+        );
     }
 }

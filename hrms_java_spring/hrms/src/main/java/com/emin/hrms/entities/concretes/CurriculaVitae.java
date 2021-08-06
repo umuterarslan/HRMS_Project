@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @Table(name = "curricula_vitaes")
 @PrimaryKeyJoinColumn(name="id")
+@DynamicUpdate
 public class CurriculaVitae {
 
     @Id

@@ -16,8 +16,29 @@ export default class EmployerService {
             });
     }
 
-    addPictureToEmployer(id, picture) {
-        axios({
+    // async updateEmployer(id, companyName, email, phoneNumber, website) {
+    //     return await axios({
+    //         method: "PUT",
+    //         url: `http://localhost:8080/api/employers/updateemployer?companyName=${companyName}&email=${email}&id=${id}&phoneNumber=${phoneNumber}&website=${website}`,
+    //         headers: {
+    //             "Content-Type": "application/json;charset=UTF-8",
+    //             "Access-Control-Allow-Origin": "*",
+    //             "Access-Control-Allow-Methods":
+    //                 "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+    //             "Access-Control-Allow-Headers":
+    //                 "Origin, X-Requested-With, Content-Type, Accept",
+    //         },
+    //     });
+    // }
+
+    async updateEmployer(id, companyName, email, phoneNumber, website) {
+        return await axios.put(
+            `http://localhost:8080/api/employers/updateemployer?companyName=${companyName}&email=${email}&id=${id}&phoneNumber=${phoneNumber}&website=${website}`
+        );
+    }
+
+    async addPictureToEmployer(id, picture) {
+        await axios({
             method: "POST",
             url: `http://localhost:8080/api/employers/addemployerpicture?employerId=${id}`,
             data: picture,
@@ -25,19 +46,27 @@ export default class EmployerService {
         });
     }
 
-    deleteEmployerById(id) {
-        axios.delete(
+    async deleteEmployerById(id) {
+        return await axios.delete(
             `http://localhost:8080/api/employers/deleteemployerbyid?id=${id}`
         );
     }
 
-    getEmployerById(id) {
-        return axios.get(
+    async getEmployerById(id) {
+        return await axios.get(
             `http://localhost:8080/api/employers/getemployerbyid?id=${id}`
         );
     }
 
-    getEmployers() {
-        return axios.get(`http://localhost:8080/api/employers/getemployers`);
+    async getEmployers() {
+        return await axios.get(
+            `http://localhost:8080/api/employers/getemployers`
+        );
+    }
+
+    async setUpdateRequest(id, bool) {
+        return await axios.post(
+            `http://localhost:8080/api/employers/setupdaterequest?bool=${bool}&id=${id}`
+        );
     }
 }

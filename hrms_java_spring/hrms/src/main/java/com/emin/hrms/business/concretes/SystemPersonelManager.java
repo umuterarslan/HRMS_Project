@@ -58,12 +58,6 @@ public class SystemPersonelManager implements SystemPersonelService {
         return new SuccessResult("Silme başarılı.");
     }
 
-//    @Override
-//    public Result updateSystemPersonel(int id, String email, String username) {
-//        this.systemPersonelDao.updateSystemPersonel(id, email, username);
-//        return new SuccessResult("Sistem personel bilgileri güncelleme başarılı.");
-//    }
-
     @Override
     public Result updateSystemPersonel(int id, String email, String username) {
         try {

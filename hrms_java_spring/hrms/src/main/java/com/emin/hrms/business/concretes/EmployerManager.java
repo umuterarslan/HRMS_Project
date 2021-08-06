@@ -46,7 +46,7 @@ public class EmployerManager implements EmployerService {
                 return new ErrorResult("Şirket gerçekliği doğrulanamadı!");
             } else {
                 this.employerDao.save(employer);
-                return new SuccessResult("İş arayan olarak kayıt olundu! " + emailSenderService.emailSender(employer));
+                return new SuccessResult("İş arayan olarak kayıt olundu! " + emailSenderService.emailSender(employer.getEmail()));
             }
         } catch (Exception e) {
             if (e.getMessage()
@@ -59,29 +59,49 @@ public class EmployerManager implements EmployerService {
     }
 
     @Override
-    public Result updateEmployer(Employer employer) {
-        String[] employerWebsite = employer.getWebsite().split("\\.", 2);
-        String website = employerWebsite[1];
-        String[] employerEmail = employer.getEmail().split("@");
+    public Result updateEmployer(int id, String companyName, String email, String phoneNumber, String website) {
+        String[] employerWebsite = website.split("\\.", 2);
+        String splittedWebsite = employerWebsite[1];
+        String[] employerEmail = email.split("@");
         String employerDomain = employerEmail[1];
         try {
-            if (!EmailValidator.emailFormatController(employer.getEmail())) {
+            if (!EmailValidator.emailFormatController(email)) {
                 return new ErrorResult("Mail formata uygun değil!");
-            } else if (!employerDomain.equals(website)) {
+            } else if (!employerDomain.equals(splittedWebsite)) {
                 return new ErrorResult("Şirket gerçekliği doğrulanamadı!");
             } else {
-                this.employerDao.save(employer);
-                return new SuccessResult("İş arayan bilgileri güncellemesi başarılı. " + emailSenderService.emailSender(employer));
+                this.employerDao.updateEmployer(id, companyName, email, phoneNumber, website);
+                return new SuccessResult("İş arayan bilgileri güncellemesi başarılı. " + emailSenderService.emailSender(email));
             }
         } catch (Exception e) {
             return new ErrorResult(e.toString());
         }
     }
 
+//    @Override
+//    public Result updateEmployer(EmployerUpdateDto employerUpdateDto) {
+//        String[] employerWebsite = employerUpdateDto.getWebsite().split("\\.", 2);
+//        String website = employerWebsite[1];
+//        String[] employerEmail = employerUpdateDto.getEmail().split("@");
+//        String employerDomain = employerEmail[1];
+//        try {
+//            if (!EmailValidator.emailFormatController(employerUpdateDto.getEmail())) {
+//                return new ErrorResult("Mail formata uygun değil!");
+//            } else if (!employerDomain.equals(website)) {
+//                return new ErrorResult("Şirket gerçekliği doğrulanamadı!");
+//            } else {
+//                this.employerDao.save((Employer) this.dtoConverterService.dtoClassConverter(employerUpdateDto, Employer.class));
+//                return new SuccessResult("İş arayan bilgileri güncellemesi başarılı. " + emailSenderService.emailSender(this.employerDao.save((Employer) this.dtoConverterService.dtoClassConverter(employerUpdateDto, Employer.class))));
+//            }
+//        } catch (Exception e) {
+//            return new ErrorResult(e.toString());
+//        }
+//    }
+
     @Override
     public DataResult<Employer> getEmployerById(int id) {
         if (this.employerDao.getEmployerById(id) != null) {
-            return new SuccessDataResult<>(this.employerDao.getEmployerById(id),"iş veren bilgileri getirildi");
+            return new SuccessDataResult<>(this.employerDao.getEmployerById(id), "iş veren bilgileri getirildi");
         } else {
             return new ErrorDataResult<>(null, "İş veren bilgileri getirme başarısız!");
         }
@@ -101,6 +121,12 @@ public class EmployerManager implements EmployerService {
         employer.setPictureUrl(url.toString());
         this.employerDao.save(employer);
         return new SuccessResult("Başarılı.");
+    }
+
+    @Override
+    public Result setUpdateRequest(int id, Boolean bool) {
+        this.employerDao.setUpdateRequest(id, bool);
+        return new SuccessResult("İş verene ait güncelleme durumu bilgisi değiştirildi.");
     }
 
 }

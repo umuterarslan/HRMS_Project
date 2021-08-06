@@ -33,6 +33,8 @@ export default function JobAdvertCreate() {
         });
     }, []);
 
+    console.log(employer);
+
     const remoteOrStandartSelect = [
         { key: 1, label: "Ofisten Çalışma", value: "Ofisten Çalışma" },
         { key: 2, label: "Uzaktan Çalışma", value: "Uzaktan Çalışma" },

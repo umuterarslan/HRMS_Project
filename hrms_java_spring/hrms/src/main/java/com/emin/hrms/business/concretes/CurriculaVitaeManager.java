@@ -7,7 +7,6 @@ import com.emin.hrms.core.utilities.results.*;
 import com.emin.hrms.dataAccess.abstracts.CurriculaVitaeDao;
 import com.emin.hrms.entities.concretes.CurriculaVitae;
 import com.emin.hrms.entities.dtos.addDtos.CurriculaVitaeAddDto;
-import com.emin.hrms.entities.dtos.updateDtos.CurriculaVitaeCoverLetterUpdateDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +21,7 @@ public class CurriculaVitaeManager implements CurriculaVitaeService {
     private DtoConverterService dtoConverterService;
 
     @Autowired
-    public CurriculaVitaeManager(CurriculaVitaeDao curriculaVitaeDao, CloudinaryService cloudinaryService,DtoConverterService dtoConverterService) {
+    public CurriculaVitaeManager(CurriculaVitaeDao curriculaVitaeDao, CloudinaryService cloudinaryService, DtoConverterService dtoConverterService) {
         this.curriculaVitaeDao = curriculaVitaeDao;
         this.cloudinaryService = cloudinaryService;
         this.dtoConverterService = dtoConverterService;
@@ -30,15 +29,14 @@ public class CurriculaVitaeManager implements CurriculaVitaeService {
 
     @Override
     public Result addCv(CurriculaVitaeAddDto curriculaVitaeAddDto) {
-        this.curriculaVitaeDao.save((CurriculaVitae)
-        this.dtoConverterService.dtoClassConverter(curriculaVitaeAddDto, CurriculaVitae.class));
+        this.curriculaVitaeDao.save((CurriculaVitae) this.dtoConverterService.dtoClassConverter(curriculaVitaeAddDto, CurriculaVitae.class));
         return new SuccessResult("Cv Oluşturuldu.");
     }
 
     @Override
     public DataResult<CurriculaVitae> getByJobSeekerId(int id) {
         if (this.curriculaVitaeDao.getByJobSeekerId(id) != null) {
-            return new SuccessDataResult<>(this.curriculaVitaeDao.getByJobSeekerId(id),"İş arayan cv'si görüntülendi.");
+            return new SuccessDataResult<>(this.curriculaVitaeDao.getByJobSeekerId(id), "İş arayan cv'si görüntülendi.");
         } else {
             return new ErrorDataResult<>(null, "İş arayanın bir cv'si bulunmamaktadır!");
         }

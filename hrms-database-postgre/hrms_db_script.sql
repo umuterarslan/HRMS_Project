@@ -28,11 +28,12 @@ CREATE TABLE public.jobseekers
 
 CREATE TABLE public.employers
 (
-    user_id      INTEGER                NOT NULL,
-    picture_url  CHARACTER VARYING(500),
-    company_name CHARACTER VARYING(255) NOT NULL,
-    website      CHARACTER VARYING(255) NOT NULL,
-    phone_number CHARACTER VARYING(12)  NOT NULL,
+    user_id        INTEGER                NOT NULL,
+    picture_url    CHARACTER VARYING(500),
+    company_name   CHARACTER VARYING(255) NOT NULL,
+    website        CHARACTER VARYING(255) NOT NULL,
+    phone_number   CHARACTER VARYING(12)  NOT NULL,
+    update_request boolean                NOT NULL,
     CONSTRAINT pk_employers PRIMARY KEY (user_id),
     CONSTRAINT fk_employers_users FOREIGN KEY (user_id) REFERENCES public.users (id) ON DELETE CASCADE,
     CONSTRAINT uc_employers_company_name UNIQUE (company_name)
@@ -49,8 +50,8 @@ CREATE TABLE public.system_personels
 
 CREATE TABLE public.job_positions
 (
-    id        integer               NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
-    job_title character varying(50) NOT NULL,
+    id        INTEGER               NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    job_title CHARACTER VARYING(50) NOT NULL,
     CONSTRAINT pk_job_positions PRIMARY KEY (id),
     CONSTRAINT uc_job_positions_job_title UNIQUE (job_title)
 );
@@ -187,12 +188,24 @@ CREATE TABLE public.technologies
     CONSTRAINT pk_technologies PRIMARY KEY (id)
 );
 
-CREATE TABLE public.favorite_job_adverts_for_jobseekers
+CREATE TABLE public.saved_job_adverts
 (
     id            INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
     jobseeker_id  INTEGER NOT NULL,
     job_advert_id INTEGER NOT NULL,
-    CONSTRAINT pk_favorite_job_adverts_for_jobseekers PRIMARY KEY (id)
+    CONSTRAINT pk_saved_job_adverts PRIMARY KEY (id)
+);
+
+CREATE TABLE public.employer_update_requests
+(
+    id           INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 999999 CACHE 1 ),
+    employer_id  INTEGER NOT NULL,
+    company_name CHARACTER VARYING(255),
+    website      CHARACTER VARYING(255),
+    phone_number CHARACTER VARYING(12),
+    email        CHARACTER VARYING(255),
+    CONSTRAINT pk_job_advert_update_requests primary key (id),
+    CONSTRAINT uc_employer_update_requests_employer_id UNIQUE (employer_id)
 );
 
 ALTER TABLE public.curricula_vitaes
@@ -213,9 +226,12 @@ ALTER TABLE public.technologies
 ALTER TABLE public.social_medias
     ADD FOREIGN KEY (curricula_vitae_id) REFERENCES public.curricula_vitaes (id);
 
-ALTER TABLE public.favorite_job_adverts_for_jobseekers
-    ADD FOREIGN KEY (jobseeker_id) REFERENCES public.jobseekers(user_id),
-    ADD FOREIGN KEY (job_advert_id) REFERENCES public.job_adverts(id);
+ALTER TABLE public.saved_job_adverts
+    ADD FOREIGN KEY (jobseeker_id) REFERENCES public.jobseekers (user_id),
+    ADD FOREIGN KEY (job_advert_id) REFERENCES public.job_adverts (id);
+
+ALTER TABLE public.employer_update_requests
+    ADD FOREIGN KEY (employer_id) REFERENCES public.employers (user_id);
 
 INSERT INTO cities (city_name)
 VALUES ('ADANA'),

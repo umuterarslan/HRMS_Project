@@ -1,21 +1,17 @@
 package com.emin.hrms.dataAccess.abstracts;
 
-import com.cloudinary.utils.ObjectUtils;
 import com.emin.hrms.entities.concretes.JobAdvert;
-import com.emin.hrms.entities.concretes.SystemPersonel;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
-import com.cloudinary.*;
 
+import javax.persistence.TypedQuery;
 import javax.transaction.Transactional;
 import java.util.List;
 
 public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
-
-    Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap());
 
     List<JobAdvert> getAllByIsActiveTrue();
 
@@ -39,6 +35,14 @@ public interface JobAdvertDao extends JpaRepository<JobAdvert, Integer> {
 
     @Transactional
     void deleteJobAdvertById(int id);
+
+    @Query("select count (ja) from JobAdvert ja where ja.isConfirmed=true and ja.isActive=true and ja.employer.id =:id")
+    long countActiveAndConfirmedByEmployerId(int id);
+
+    @Query("select count (ja) from JobAdvert ja where ja.isConfirmed=true and ja.isActive=true")
+    long countAllActiveAndConfirmed();
+
+    List<JobAdvert> getJobAdvertByIsActiveTrueAndIsConfirmedTrueAndEmployer_Id(int id);
 
 }
 

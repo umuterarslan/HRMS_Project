@@ -15,6 +15,9 @@ import CvDetail from "./components/CvDetail";
 import JobAdvertCreate from "./components/JobAdvertCreate";
 import SystemPersonelCreate from "./components/SystemPersonelCreate";
 import SystemPersonelUpdate from "./components/SystemPersonelUpdate";
+import EmployerDetail from "./components/EmployerDetail";
+import EmployerUpdateRequestCreate from "./components/EmployerUpdateRequestCreate";
+import EmployerUpdateRequestList from "./components/EmployerUpdateRequestList";
 
 function App() {
     return (
@@ -62,6 +65,21 @@ function App() {
                             path="/systempersonelupdate"
                             exact
                             component={SystemPersonelUpdate}
+                        />
+                        <Route
+                            path="/employerdetail"
+                            exact
+                            component={EmployerDetail}
+                        />
+                        <Route
+                            path="/employerupdaterequestcreate"
+                            exact
+                            component={EmployerUpdateRequestCreate}
+                        />
+                        <Route
+                            path="/employerupdaterequestlist"
+                            exact
+                            component={EmployerUpdateRequestList}
                         />
                     </Switch>
                 </Container>

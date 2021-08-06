@@ -10,7 +10,7 @@ import {
 import { useParams } from "react-router-dom";
 import JobAdvertService from "../services/jobAdvertService";
 
-export default function JobAdvertDetail() {
+function JobAdvertDetail() {
     const { id } = useParams();
 
     const [jobAdvert, setJobAdvert] = useState({});
@@ -131,15 +131,15 @@ export default function JobAdvertDetail() {
                                     <Table.Row></Table.Row>
                                 </Table.Footer>
                             </Table>
-                            <Button
-                                floated="right"
-                                style={{
-                                    color: "#2ed573",
-                                    border: "solid 1.5px #2ed573",
-                                    backgroundColor: "#fff",
-                                }}
-                            >
+                            <Button fluid color="green">
                                 Başvur
+                            </Button>
+                            <Button
+                                fluid
+                                color="blue"
+                                style={{ marginTop: "1%" }}
+                            >
+                                İlanı Kaydet
                             </Button>
                         </Card.Content>
                     </Card>
@@ -148,3 +148,5 @@ export default function JobAdvertDetail() {
         </div>
     );
 }
+
+export default JobAdvertDetail;
